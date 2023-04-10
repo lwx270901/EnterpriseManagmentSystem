@@ -1,1 +1,70 @@
 /* main stylesheet for the application */
+:root {
+    --section-orange: #ffb768;
+    --section-blue: #cae4f2;
+    --main-text: #2e190e;
+    --secondary-text: #9100ff;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    background-color: var(--section-blue) !important;
+    font-family: monospace !important;
+}
+
+section:nth-of-type(4n+1) {
+    background-color: var(--section-blue);
+}
+
+section:nth-of-type(4n+2) {
+    background-color: var(--section-orange);
+
+}
+
+section:nth-of-type(4n+3) {
+    background-color: var(--section-blue);
+
+}
+
+section:nth-of-type(4n+4) {
+    background-color: var(--section-orange)
+}
+
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 10vh;
+
+    overflow: hidden;
+}
+
+.nav-bar li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    line-height: 5;
+    /* border:  solid blue; */
+}
+
+.nav-bar li a:hover,
+a:active {
+    background-color: var(--secondary-text);
+    color: var(--section-orange);
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.nav-bar li a {
+    padding: 0;
+    margin: 0;
+    color: var(--main-text);
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-size: 25px;
+
+    align-items: center;
+}
