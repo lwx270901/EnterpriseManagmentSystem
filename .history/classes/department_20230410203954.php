@@ -44,4 +44,3 @@ class Department {
     return $stmt->rowCount();
   }
 }
-?>

@@ -30,7 +30,6 @@ $task = new Task($db);
 $review = new Review($db);
 $result = new Result($db);
 $department = new Department($db);
-$employee = new Employee($db);
 
 
 ?>

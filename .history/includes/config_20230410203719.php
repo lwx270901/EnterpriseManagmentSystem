@@ -27,10 +27,5 @@ session_start();
 // We can create all object to perform operation heare and include in file that need to use
 $user = new User($db);
 $task = new Task($db);
-$review = new Review($db);
-$result = new Result($db);
-$department = new Department($db);
-$employee = new Employee($db);
-
 
 ?>

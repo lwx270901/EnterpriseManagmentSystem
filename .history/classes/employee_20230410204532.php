@@ -53,4 +53,3 @@ class Employee {
     return $stmt->rowCount();
   }
 }
-?>

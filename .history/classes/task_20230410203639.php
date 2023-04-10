@@ -31,4 +31,3 @@ class Task {
     return $stmt->rowCount();
   }
 }
-?>

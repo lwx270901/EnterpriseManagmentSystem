@@ -33,4 +33,3 @@ class Review {
     return $stmt->rowCount();
   }
 }
-?>
