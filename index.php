@@ -1,15 +1,3 @@
-<!-- this is index file -->
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
-</html>
 <?php
 // Start the session
 session_start();
@@ -37,22 +25,53 @@ include_once 'includes/functions.php';
 $user_role = $_SESSION['role'];
 
 // Include the header template
-include_once 'templates/header.php';
 
 // Display the appropriate page based on the user's role
-// switch ($user_role) {
-//   case 'director':
-//     include_once 'pages/dashboard.php';
-//     break;
-//   case 'department_head':
-//     include_once 'pages/task_assign.php';
-//     break;
-//   case 'employee':
-//     include_once 'pages/task_submit.php';
-//     break;
-// }
 
 // Include the footer template
 
-include_once 'templates/footer.php';
 ?>
+<!-- this is index file -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/js/bootstrap.js">
+  <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <?php
+  include_once 'templates/header.php';
+  ?>
+  <section>
+    <?php
+    switch ($user_role) {
+      case 'director':
+        include_once 'pages/dashboard.php';
+        break;
+      case 'department_head':
+        include_once 'pages/task_assign.php';
+        break;
+      case 'employee':
+        include_once 'pages/task_submit.php';
+        break;
+    }
+    ?>
+  </section>
+  <section>
+    <?php
+    include_once 'templates/footer.php';
+
+    ?>
+  </section>
+
+
+
+</body>
+
+</html>

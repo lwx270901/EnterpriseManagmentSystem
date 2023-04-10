@@ -33,11 +33,11 @@ section:nth-of-type(4n+4) {
 }
 
 .nav-bar {
+
     list-style-type: none;
     margin: 0;
     padding: 0;
     height: 10vh;
-
     overflow: hidden;
 }
 

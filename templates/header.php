@@ -11,10 +11,11 @@
 <?php if ($_SESSION['role'] == 'director') : ?>
 
     <section>
-        <ul class="nav-bar row px-0 g-0">
+        <ul class="nav-bar row px-0     ">
             <li class="col-4 px-0"><a href="?func=dashboard">Dashboard</a></li>
-            <li class="col-4 px-0"><a href="?func=assignDH">Products</a></li>
+            <li class="col-4 px-0"><a href="?func=assignDH">Assign deparment heads</a></li>
             <li class="col-4 px-0"><a href="?func=logout">Logout</a></li>
+
         </ul>
 
     </section>
