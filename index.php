@@ -9,14 +9,19 @@ include_once 'includes/config.php';
 // Include the functions file
 include_once 'includes/functions.php';
 
+// Include the user.php
+include_once 'classes/user.php';
+
 // Check if the user is logged in
-if (!is_logged_in()) {
-  header('Location: login.php');
+$user = new User($db);
+
+if (!$user->is_logged_in()) {
+  header('Location: pages/login.php');
   exit;
 }
 
 // Get the user's role
-$user_role = get_user_role();
+$user_role = $user->get_user_role();
 
 // Include the header template
 include_once 'templates/header.php';
