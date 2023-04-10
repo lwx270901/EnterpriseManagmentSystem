@@ -1,17 +1,14 @@
 /* main stylesheet for the application */
-:root {
-    --section-orange: #ffb768;
-    --section-blue: #cae4f2;
-    --main-text: #2e190e;
-    --secondary-text: #9100ff;
-}
+@import "./variable.css";
 
 body {
     padding: 0;
     margin: 0;
     height: 100vh;
-    background-color: var(--section-blue) !important;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(#1663ba), to(#0e349c));
+    background-image: -webkit-linear-gradient(-45deg, #1663ba, #0e349c);
     font-family: monospace !important;
+    text-decoration: var(--main-text);
 }
 
 section:nth-of-type(4n+1) {
@@ -19,7 +16,7 @@ section:nth-of-type(4n+1) {
 }
 
 section:nth-of-type(4n+2) {
-    background-color: var(--section-orange);
+    background-color: var(--section-gray);
 
 }
 
@@ -29,7 +26,7 @@ section:nth-of-type(4n+3) {
 }
 
 section:nth-of-type(4n+4) {
-    background-color: var(--section-orange)
+    background-color: var(--section-gray)
 }
 
 .nav-bar {
@@ -49,10 +46,10 @@ section:nth-of-type(4n+4) {
     /* border:  solid blue; */
 }
 
-.nav-bar li a:hover,
+.nav-bar li a:hover
 a:active {
     background-color: var(--secondary-text);
-    color: var(--section-orange);
+    color: var(--primary-text);
     padding-left: 0;
     padding-right: 0;
 }
@@ -68,3 +65,4 @@ a:active {
 
     align-items: center;
 }
+
