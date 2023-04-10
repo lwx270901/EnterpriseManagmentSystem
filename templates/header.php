@@ -1,5 +1,5 @@
 <!-- header template for each page -->
-<!-- <section>
+<!-- 
             <ul class="nav-bar row px-0 g-0">
                 <li class="col-3 px-0"><a href="?page=home">Home</a></li>
                 <li class="col-3 px-0"><a href="?page=products">Products</a></li>
@@ -7,40 +7,50 @@
                 <li class="col-3 px-0"><a href="?page=login">Login</a></li>
             </ul>
 
-        </section> -->
-<?php if ($_SESSION['role'] == 'director') : ?>
+         -->
+<?php if ($_SESSION['role'] == 'director'): ?>
 
-    <section>
-        <ul class="nav-bar row px-0     ">
-            <li class="col-4 px-0"><a href="?func=dashboard">Dashboard</a></li>
-            <li class="col-4 px-0"><a href="?func=assignDH">Assign deparment heads</a></li>
-            <li class="col-4 px-0"><a href="?func=logout">Logout</a></li>
 
-        </ul>
+    <ul class="nav-bar row px-0     ">
+        <li class="col-4 px-0"><a href="?page=dashboard">Dashboard</a></li>
+        <li class="col-4 px-0"><a href="?page=assignDH">Assign deparment heads</a></li>
+        <li class="col-4 px-0"><a href="?page=logout">Logout</a></li>
 
-    </section>
+    </ul>
 
-<?php elseif ($_SESSION['role'] == 'department_head') : ?>
 
-    <section>
-        <ul class="nav-bar row px-0 g-0">
-            <li class="col-3 px-0"><a href="?func=dashboard">Dashboard</a></li>
-            <li class="col-3 px-0"><a href="?func=assignEmployee">Assign Employee</a></li>
-            <li class="col-3 px-0"><a href="?func=assignTask">Assign Task</a></li>
-            <li class="col-3 px-0"><a href="?func=logout">Logout</a></li>
-        </ul>
 
-    </section>
-<?php elseif ($_SESSION['role'] == 'emlpoyee') : ?>
-    <section>
-        <ul class="nav-bar row px-0 g-0">
-            <li class="col-4 px-0"><a href="?func=viewTask">viewTask</a></li>
-            <li class="col-4 px-0"><a href="?func=submitTask">submit Task</a></li>
-            <li class="col-4 px-0"><a href="?func=logout">Logout</a></li>
-        </ul>
-<?php else : ?>
-    <section>
-        <ul class="nav-bar row px-0 g-0">
-            <li class="col-12 px-0"><a href="?func=logout">Login</a></li>
-        </ul>
+<?php elseif ($_SESSION['role'] == 'department_head'): ?>
+
+
+    <ul class="nav-bar row px-0">
+        <li class="col-3 px-0"><a href="?page=dashboard">Dashboard</a></li>
+        <li class="col-3 px-0"><a href="?page=assignEmployee">Assign Employee</a></li>
+        <li class="col-3 px-0"><a href="?page=assignTask">Assign Task</a></li>
+        <li class="col-3 px-0"><a href="?page=logout">Logout</a></li>
+    </ul>
+
+
+<?php elseif ($_SESSION['role'] == 'employee'): ?>
+
+    <ul class="nav-bar row px-0">
+        <li class="col-4 px-0"><a href="?page=viewTask">viewTask</a></li>
+        <li class="col-4 px-0"><a href="?page=submitTask">submit Task</a></li>
+        <li class="col-4 px-0"><a href="?page=logout">Logout</a></li>
+    </ul>
+<?php else: ?>
+
+    <ul class="nav-bar row px-0">
+        <li class="col px-0"><a href="?page=home">Home</a></li>
+
+        <li class="col px-0"><a href="?page=login">Login</a></li>
+    </ul>
 <?php endif; ?>
+<?php
+$page = isset($_GET["page"]) ? $_GET["page"] : 0;
+switch ($page) {
+    case "logout":
+        logout();
+}
+
+?>

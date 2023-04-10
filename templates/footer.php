@@ -7,4 +7,5 @@
 
 <?php elseif ($_SESSION['role'] == 'employee') : ?>
 
+<?php else : ?>
 <?php endif; ?>

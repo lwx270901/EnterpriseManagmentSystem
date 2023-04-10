@@ -19,6 +19,8 @@ class User {
     } else {
       return false;
     }
+    
+
   }
 
   public function is_logged_in() {
