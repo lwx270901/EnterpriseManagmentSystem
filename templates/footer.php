@@ -5,7 +5,6 @@
 
 <?php elseif ($_SESSION['role'] == 'department_head') : ?>
 
-<?php elseif ($_SESSION['role'] == 'department_head') : ?>
+<?php elseif ($_SESSION['role'] == 'employee') : ?>
 
-
-<? endif; ?>
+<?php endif; ?>
