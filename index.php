@@ -35,13 +35,13 @@ $user_role = $_SESSION['role']
     } else {
       switch ($user_role) {
         case 'director':
-          include_once 'pages/dashboard.php';
+          include_once 'pages/director.php';
           break;
         case 'department_head':
-          include_once 'pages/task_assign.php';
+          include_once 'pages/department_head.php';
           break;
         case 'employee':
-          include_once 'pages/task_submit.php';
+          include_once 'pages/employee.php';
           break;
       }
     }
