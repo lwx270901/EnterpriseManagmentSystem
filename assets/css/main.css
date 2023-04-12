@@ -13,15 +13,20 @@ body {
 
 .header {
     padding: 10px 0;
+    z-index: 1000;
 }
-.header-content {
+
+.nav-bar-container {
+    padding: 0 0;
+    margin: 0;
     max-width: 1100px;
-    margin: auto;
-    
 }
+
+
+
 .nav-bar {
 
-    /* list-style-type: none; */
+    list-style-type: none;
     margin: 0;
     padding: 0;
     height: 10vh;
@@ -36,16 +41,14 @@ body {
     /* border:  solid blue; */
 }
 
-.nav-bar li
-a:active {
+.nav-bar li a:active {
     background-color: var(--section-gray);
     color: var(--main-text);
     padding-left: 0;
     padding-right: 0;
 }
 
-.nav-bar li
-a:hover {
+.nav-bar li a:hover {
     color: var(--secondary-text);
     background-color: var(--section-gray);
 }
@@ -60,5 +63,11 @@ a:hover {
     font-size: 25px;
 
     align-items: center;
+}
+
+.user {
+    padding: 20px 0px 0px 0px;  
+    text-align: center;
+    color: var(--main-text);
 }
 
