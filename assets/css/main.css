@@ -7,7 +7,7 @@ body {
     height: 100vh;
     background-image: -webkit-gradient(linear, left top, right bottom, from(#1663ba), to(#0e349c));
     background-image: -webkit-linear-gradient(-45deg, #1663ba, #0e349c);
-    font-family: monospace !important;
+    font-family: var(--main-font);
     text-decoration: var(--main-text);
 }
 

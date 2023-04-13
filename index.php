@@ -1,6 +1,5 @@
 <?php
 // Start the session
-
 include_once 'includes/config.php';
 include_once 'includes/functions.php';
 
@@ -38,7 +37,7 @@ $user_role = $_SESSION['role']
           include_once 'pages/director.php';
           break;
         case 'department_head':
-          include_once 'pages/department_head.php';
+          include_once 'pages/department.php';
           break;
         case 'employee':
           include_once 'pages/employee.php';
@@ -53,7 +52,7 @@ $user_role = $_SESSION['role']
 
     ?>
   </section>
-
+  
 
 
 </body>
