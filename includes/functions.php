@@ -4,6 +4,6 @@ function logout()
 {
     session_destroy();
     unset($_SESSION['user']);
-    header('Location: index.php');
+    header('Location: pages/login.php');
 }
 ?>
