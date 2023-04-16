@@ -8,6 +8,10 @@ if (isset($_GET['func'])) {
         case 'logout':
             logout();
             break;
+
     }
+} else {
+    include_once 'components/director-dashboard.php';
+
 }
 ?>
