@@ -8,7 +8,7 @@
             </ul>
 
          -->
-<?php if ($_SESSION['role'] == 'director'): ?>
+<?php if ($_SESSION['role'] == Role::Director->value): ?>
 
 
     <ul class="nav-bar row px-0     ">
@@ -20,7 +20,7 @@
 
 
 
-<?php elseif ($_SESSION['role'] == 'department_head'): ?>
+<?php elseif ($_SESSION['role'] == Role::DepartmentHead->value): ?>
 
 
     <ul class="nav-bar row px-0">
@@ -31,7 +31,7 @@
     </ul>
 
 
-<?php elseif ($_SESSION['role'] == 'employee'): ?>
+<?php elseif ($_SESSION['role'] == Role::Employee->value): ?>
 
     <ul class="nav-bar row px-0">
         <li class="col-4 px-0"><a href="?page=viewTask">viewTask</a></li>
