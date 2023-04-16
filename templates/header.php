@@ -20,7 +20,7 @@
         </div>
     </div>
 
-<?php elseif ($_SESSION['role'] == 'department_head') : ?>
+    <?php if ($_SESSION['role'] == Role::DepartmentHead->value): ?>
     <div class="header">
         <div class="row g-0">
             <div class="col-lg-2 col-sm-0">
