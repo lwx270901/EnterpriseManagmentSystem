@@ -17,7 +17,7 @@ define('DB_PASS', '');
 
 // User class autoloading
 spl_autoload_register(function ($class_name) {
-  include 'classes/' . $class_name . '.php';
+  include $_SERVER['DOCUMENT_ROOT'] . "/classes/" . $class_name . '.php';
 });
 
 // Start session
@@ -32,4 +32,6 @@ session_start();
 // $employee = new Employee($db);
 // $department = new Department($db);
 
+// Load backed enum for Role
+include_once $_SERVER['DOCUMENT_ROOT'] . "/enum/role.php";
 ?>

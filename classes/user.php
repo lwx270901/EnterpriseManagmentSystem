@@ -9,18 +9,17 @@ class User {
 
   public function login($username, $password) {
     // Prepare and execute the SQL query to check if the username and password are valid
-    $stmt = $this->db->prepare('SELECT id, role FROM users WHERE username = ? AND password = ?');
+    // $stmt = $this->db->prepare('SELECT EmployeeId, role FROM employees WHERE username = ? AND password = ?');
+    $stmt = $this->db->prepare('CALL Procedure_HandleEmployeeLogin (?, ?);');
     $stmt->execute(array($username, $password));
 
     // Fetch the results and return the user's ID and role if the username and password are valid
     if ($stmt->rowCount() == 1) {
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      return array('id' => $row['id'], 'role' => $row['role']);
+      return array('user_id' => $row['EmployeeId'], 'role_id' => $row['RoleId'], 'username' => $row['UserName']);
     } else {
       return false;
     }
-    
-
   }
 
   public function is_logged_in() {
