@@ -1,17 +1,4 @@
-<style>
-    .table-header {
-        max-width: 1100px;
-        margin: auto;
-        background-color: var(--section-gray);
-        font-family: var(--main-font);
-    }
-
-    .field-name {
-        text-align: center;
-        /* border-style: solid; */
-
-    }
-</style>
+<link rel="stylesheet" href="assets/css/director-dashboard.css">
 
 <div class="table-header row px-0 g-0">
 
