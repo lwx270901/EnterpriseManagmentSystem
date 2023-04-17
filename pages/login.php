@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap-5.3.0-alpha3-dist/js/bootstrap.js">
     <link rel="stylesheet" href="../bootstrap-5.3.0-alpha3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
     <title>Document</title>
 </head>
 
@@ -70,61 +71,3 @@ if (isset($_POST['submit'])) {
 
 </html>
 
-<style>
-    @import "../assets/css/main.css";
-
-    :root {
-        --login-element-width: 80%;
-        --login-button-background: #2bd14e;
-        --login-button-text: #ffffff;
-        --login-button-border-radius: 12px;
-    }
-
-    .big-card {
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-    }
-
-    .login-card {
-        height: 100vh;
-        background-color: var(--section-gray);
-
-    }
-
-    .back-card {
-        height: 100vh;
-        border-style: dashed;
-        background: #0f2027;
-        background: -webkit-linear-gradient(to right, #0f2027, #203a43, #2c5364);
-        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    }
-
-    #loginForm {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-        height: 60vh;
-        font-size: 1.5em;
-    }
-
-    .login-button {
-        background-color: var(--login-button-background);
-        border-radius: var(--login-button-border-radius);
-        color: var(--login-button-text);
-        width: var(--login-element-width);
-    }
-
-    .login {
-        width: var(--login-element-width);
-    }
-
-    .top-login-text {
-        padding: 35px 0px 8px;
-        text-align: center;
-    }
-</style>

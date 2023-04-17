@@ -1,6 +1,5 @@
 <?php
 // Start the session
-
 include_once 'includes/config.php';
 include_once 'includes/functions.php';
 
@@ -16,6 +15,7 @@ $user_role = $_SESSION['role']
   <link rel="stylesheet" href="./assets/css/main.css">
   <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/js/bootstrap.js">
   <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.css">
+  <script src="jquery/jquery-3.6.4.min.js"></script>
   <title>Document</title>
 </head>
 
@@ -31,13 +31,13 @@ $user_role = $_SESSION['role']
     } else {
       switch ($user_role) {
         case 'director':
-          include_once 'pages/dashboard.php';
+          include_once 'pages/director.php';
           break;
         case 'department_head':
-          include_once 'pages/task_assign.php';
+          include_once 'pages/department.php';
           break;
         case 'employee':
-          include_once 'pages/task_submit.php';
+          include_once 'pages/employee.php';
           break;
       }
     }
@@ -49,7 +49,7 @@ $user_role = $_SESSION['role']
 
     ?>
   </section>
-
+  
 
 
 </body>
