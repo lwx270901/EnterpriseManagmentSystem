@@ -4,5 +4,7 @@ function logout()
 {
     session_destroy();
     unset($_SESSION['user']);
+    unset($_SESSION['user_id']);
+    unset($_SESSION['role']);
 }
 ?>
