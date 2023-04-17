@@ -42,56 +42,6 @@
 
 
 </div>
-
-<script>
-    var searchDep = $("#search-department")
-    var depResults = $("#dep-results");
-    var searchUser = $("#search-user");
-    var userResults = $("#user-results");
-
-    // Director add department head o day, xu ly database = ajax thoi.
-    $('#add-dh').on("click", function (e) {
-        $('#department-name').append($("<div>" + searchDep.val() + "</div>"))
-        $('#department-head').append($("<div>" + searchUser.val() + "</div>"))
-
-    });
-    searchDep.on("input", function (e) {
-        handleSearch(searchDep, depResults, "./templates/search-department.php");
-    });
-    searchUser.on("input", function (e) {
-        handleSearch(searchUser, userResults, "./templates/search-user.php");
-    })
-    function handleSearch(searchBox, searchResults, url) {
-
-        var query = searchBox.val();
-        searchResults.empty();
-        if (query === "") {
-            searchResults.empty();
-            searchResults.hide();
-        }
-        // Them field data vao de query
-        // No dang luc nao echo nen chua empty luc ko search
-        $.ajax({
-            url: url,
-            method: "GET",
-            success: function (response) {
-                $.each(response, function (index, r) {
-                    var searchItem = $("<div>" + r.name + "</div>");
-                    searchItem.on("click", function (e) {
-                        searchBox.val($(this).text()); // set input value to selected option
-                        searchResults.hide();
-                    });
-                    searchResults.append(searchItem);
-                });
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error:", errorThrown);
-            }
-
-        })
-        searchResults.show();
-        query = "";
-
-    }
+<script type="module" src="pages/components/director-dashboard.js">
 
 </script>
