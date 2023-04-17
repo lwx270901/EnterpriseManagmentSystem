@@ -1,13 +1,5 @@
 <?php if ($_SESSION['role'] == 'director') : ?>
 
-    <div class="header">
-        <div class="row g-0">
-            <div class="col-lg-2 col-sm-0">
-            </div>
-            <div class="col-lg nav-bar-container">
-                <ul class="nav-bar row g-0 px-0  ">
-                    <li class="col-6 px-0"><a href="?func=director-dashboard">Dashboard</a></li>
-                    <li class="col-6 px-0"><a href="?func=logout">Logout</a></li>
 
                 </ul>
             </div>
@@ -59,15 +51,7 @@
         </div>
     </div>
 
-<?php elseif ($_SESSION['role'] == 'employee') : ?>
-    <div class="header">
-        <div class="row g-0">
-            <div class="col-lg-2 col-sm-0">
-            </div>
-            <div class="col-lg nav-bar-container">
-                <ul class="nav-bar row g-0 px-0  ">
-                    <li class="col-6 px-0"><a href="?func=employee-dashboard">Dashboard</a></li>
-                    <li class="col-6 px-0"><a href="?func=logout">Logout</a></li>
+
 
                 </ul>
             </div>
@@ -86,7 +70,5 @@
                 </div>
             </div>
 
-        </div>
-    </div>
 <?php endif; ?>
 <hr>
