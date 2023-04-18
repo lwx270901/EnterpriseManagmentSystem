@@ -20,7 +20,23 @@ $loginFailedMsg = "";
 function saveSessionInfoOnLoginSuccess($queryResult) {
     $_SESSION['user_id'] = $queryResult['user_id'];
     $_SESSION['user'] = $queryResult['username'];
-    $_SESSION['role'] = $queryResult['role_id'];
+
+    switch ($queryResult['role_id']){
+        case(1):
+            $_SESSION['role'] = 'director';
+            break;
+        case(2):
+            $_SESSION['role'] = 'department_head';
+            break;
+        case(3):
+            $_SESSION['role'] = 'employee';
+            break;
+        default:
+            throw('Not implemented');
+            break;
+    }
+
+    echo 'role = ' . $_SESSION['user'];
 }
 
 if (isset($_POST['submit'])) {

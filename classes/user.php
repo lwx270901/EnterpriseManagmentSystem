@@ -9,7 +9,6 @@ class User {
 
   public function login($username, $password) {
     // Prepare and execute the SQL query to check if the username and password are valid
-    // $stmt = $this->db->prepare('SELECT EmployeeId, role FROM employees WHERE username = ? AND password = ?');
     $stmt = $this->db->prepare('CALL Procedure_HandleEmployeeLogin (?, ?);');
     $stmt->execute(array($username, $password));
 
