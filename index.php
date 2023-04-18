@@ -3,6 +3,7 @@
 include_once 'includes/config.php';
 include_once 'includes/functions.php';
 
+
 $user_role = $_SESSION['role']
   ?>
 <!-- this is index file -->
@@ -25,7 +26,6 @@ $user_role = $_SESSION['role']
   ?>
   <section>
     <?php
-    echo ('user: ' . $_SESSION['user']);
     if (!isset($_SESSION['user'])) {
       header('Location:  pages/login.php');
     } else {
