@@ -1,1 +1,3 @@
-Creating script to generate database for other people use to create their local database
+## Script to generate data for local database
+
+- Adding mysql bin folder to PATH is required before the batch files can be executed. For more information, please follow this page:  [How to add mysql to windows path](https://www.tutorialspoint.com/adding-mysql-to-windows-path)
