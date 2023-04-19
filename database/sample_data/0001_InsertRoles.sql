@@ -1,4 +1,4 @@
-USE enterprise_db
+USE enterprise_db;
 
 INSERT INTO Roles (RoleId, Description)
 VALUES 
