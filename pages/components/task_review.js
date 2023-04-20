@@ -19,7 +19,7 @@ function getTasks() {
         // Clone the task template and populate the task data
         const taskRow = taskTemplate.content.cloneNode(true);
         taskRow.querySelector(".task-name").textContent = task.Description;
-        taskRow.querySelector(".task-status").textContent = task.sStatus;
+        taskRow.querySelector(".task-status").textContent = task.Status;
         taskRow.querySelector("form").dataset.taskId = task.TaskId;
 
         // Append the task row to the task list
