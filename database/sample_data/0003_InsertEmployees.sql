@@ -11,4 +11,4 @@ VALUES
 (7, 'employee3', 'e10adc3949ba59abbe56e057f20f883e', '3', 'Employee', '3', 'emp3@gmail.com', '123468', '3', '3'),
 (8, 'employee4', 'e10adc3949ba59abbe56e057f20f883e', '1', 'Employee', '4', 'emp4@gmail.com', '123469', '3', '3'),
 (9, 'employee5', 'e10adc3949ba59abbe56e057f20f883e', '2', 'Employee', '5', 'emp5@gmail.com', '123470', '2', '3'),
-(10, 'employee6', 'e10adc3949ba59abbe56e057f20f883e', '3', 'Employee', '6', 'emp6@gmail.com', '123477', '6', '3')
+(10, 'employee6', 'e10adc3949ba59abbe56e057f20f883e', '3', 'Employee', '6', 'emp6@gmail.com', '123477', '6', '3');
