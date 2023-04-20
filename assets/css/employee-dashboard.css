@@ -1,0 +1,57 @@
+:root {
+    --table-padding: 15px 32px;
+    --max-width: 1100px;
+}
+
+.table-header {
+
+    max-width: var(--max-width);
+    margin: auto;
+    background-color: var(--section-gray);
+    font-family: var(--main-font);
+}
+
+.field-name {
+    text-align: center;
+    display: inline-block;
+    font-size: 2rem;
+
+}
+
+.element {
+    font-size: 1.5rem;
+    padding: var(--table-padding);
+}
+
+.open-btn {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: var(--table-padding);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.open-btn:checked {
+    background-color: green;
+}
+.submit-card {
+    display: none;
+    background-color: var(--section-gray);
+    max-width: var(--max-width);
+    margin: auto;
+}
+.comment-section{
+    width: 100%;
+}
+.comment-section>textarea {
+    text-align: left;
+    padding: 0;
+    width: 100%;
+    line-height: 1rem;
+    height: 10rem;
+}
