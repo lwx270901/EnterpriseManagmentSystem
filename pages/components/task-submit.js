@@ -10,7 +10,7 @@ $(document).ready(function() {
       const formData = new FormData($('form')[0]);
       
       $.ajax({
-        url: '/submit-form',
+        url: 'submit-form.php',
         type: 'POST',
         data: formData,
         contentType: false,

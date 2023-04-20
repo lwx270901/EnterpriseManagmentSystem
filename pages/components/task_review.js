@@ -7,7 +7,7 @@ $(document).ready(function() {
       
       if (searchTerm.length >= 3) {
         $.ajax({
-          url: '/search-tasks',
+          url: 'search-tasks.php',
           type: 'GET',
           data: { q: searchTerm },
           success: function(response) {
@@ -36,7 +36,7 @@ $(document).ready(function() {
       const formData = $(this).serialize();
       
       $.ajax({
-        url: '/review-task',
+        url: '/review-task.php',
         type: 'POST',
         data: formData,
         success: function(response) {

@@ -19,7 +19,7 @@ $(document).ready(function() {
       }
       
       $.ajax({
-        url: '/assign-task',
+        url: 'assign-task.php',
         type: 'POST',
         data: $(this).serialize(),
         success: function(response) {
