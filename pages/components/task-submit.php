@@ -13,3 +13,7 @@
         </div>
     </form>
 </div>
+
+<script type="module" src="pages/components/task-submit.js">
+
+</script>
