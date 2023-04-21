@@ -7,7 +7,7 @@ class Task {
   }
 
   public function get_tasks_by_employee($employee_id) {
-    $stmt = $this->db->prepare('SELECT * FROM tasks WHERE employee_id = :employee_id');
+    $stmt = $this->db->prepare('CALL Procedure_GetTasksByEmployeeId (:employee_id);');
     $stmt->bindParam(':employee_id', $employee_id);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

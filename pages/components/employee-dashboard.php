@@ -30,7 +30,7 @@
     </div>
 </div>
 <?php
-include_once 'task-submit.php'
-    ?>
+include_once 'task-submit.php';
+?>
 <script type="module" src="pages/components/employee-dashboard.js"></script>
 <link rel="stylesheet" href="assets/css/employee-dashboard.css">
