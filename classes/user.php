@@ -1,5 +1,5 @@
-<!-- (class for managing user accounts) -->
 <?php
+// Class for managing user accounts
 class User {
   private $db;
 

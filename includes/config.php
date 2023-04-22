@@ -1,4 +1,3 @@
-<!-- (configuration file for connecting to the database) -->
 <?php
 // Database configuration
 define('DB_HOST', 'localhost');
@@ -25,10 +24,10 @@ session_start();
 
 // Create User object
 // We can create all object to perform operation heare and include in file that need to use
-$user = new User($db);
-$task = new Task($db);
-$review = new Review($db);
-$result = new Result($db);
-$employee = new Employee($db);
-$department = new Department($db);
+$user_control = new User($db);
+$task_control = new Task($db);
+$review_control = new Review($db);
+$result_control = new Result($db);
+$employee_control = new Employee($db);
+$department_control = new Department($db);
 ?>

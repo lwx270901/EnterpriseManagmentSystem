@@ -1,19 +1,36 @@
 
-import {handleSearch} from "../../assets/js/handleSearch.js"
+import {handleSearch} from "../../assets/js/handleSearch.js";
+import {handleAddDep} from "../../assets/js/handleAddDep.js";
+
 var searchDep = $("#search-department");
+var description = $("#department-description");
 var depResults = $("#dep-results");
 var searchUser = $("#search-user");
 var userResults = $("#user-results");
 
-// Director add department head o day, xu ly database = ajax thoi.
 $('#add-dh').on("click", function(e) {
-    $('#department-name').append($("<div>" + searchDep.val() + "</div>"))
-    $('#department-head').append($("<div>" + searchUser.val() + "</div>"))
+    e.preventDefault();
+    // $('#department-name').append($("<div>" + searchDep.val() + "</div>"))
+    // $('#department-head').append($("<div>" + searchUser.val() + "</div>"))
+    handleAddDep(searchDep.val(), description.val(), searchUser.val(), "pages/director/add-department.php");
+});
 
-});
-searchDep.on("input", function(e) {
-    handleSearch(searchDep, depResults, "./templates/search-department.php");
-});
-searchUser.on("input", function(e) {
-    handleSearch(searchUser, userResults, "./templates/search-user.php");
+// searchDep.keyup(function () {
+//     let searchText = $(this).val();
+//     if (this.value == '') {
+//         depResults.hide();
+//     } else {
+//     handleSearch(searchDep, searchText, depResults, "pages/director/search-department.php");
+//     }
+// });
+
+searchUser.keyup(function () {
+    let searchText = $(this).val();
+    if (this.value == '') {
+        userResults.hide();
+    } else {
+        handleSearch(searchUser, searchText, userResults, "pages/director/search-user.php");
+        console.log(searchDep.val()+" "+ searchUser.val());
+    }
 })
+

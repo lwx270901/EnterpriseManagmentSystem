@@ -1,21 +1,23 @@
-export function handleSearch(searchBox, searchResults, url) {
+export function handleSearch(searchBox, searchText, searchResults, url) {
 
-    var query = searchBox.val();
     searchResults.empty();
-    if (query === "") {
+    if (searchText === "") {
         searchResults.empty();
         searchResults.hide();
     }
-    // Them field data vao de query
-    // No dang luc nao echo nen chua empty luc ko search
     $.ajax({
         url: url,
-        method: "GET",
+        method: "POST",
+        data: {
+            query: searchText,
+        },
         success: function (response) {
             $.each(response, function (index, r) {
                 var searchItem = $("<div>" + r.name + "</div>");
+                console.log(searchItem);
                 searchItem.on("click", function (e) {
-                    searchBox.val($(this).text()); // set input value to selected option
+                    searchBox.val($(this).text());
+                    searchResults.empty();
                     searchResults.hide();
                 });
                 searchResults.append(searchItem);
@@ -27,6 +29,4 @@ export function handleSearch(searchBox, searchResults, url) {
 
     })
     searchResults.show();
-    query = "";
-
 }

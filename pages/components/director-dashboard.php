@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="assets/css/director-dashboard.css">
 
-<div class="table-header row px-0 g-0">
+    <!-- <div class="table-header row px-0 g-0">
 
     <div class="field-name col-6 px-0" id="department-name">Department name
         <div class="field-name"> d1</div>
@@ -9,18 +9,25 @@
     </div>
     <div class="field-name col-6 px-0" id="department-head">Deparment head
         <div class="field-name"> A</div>
-        <div class="field-name"> B</div>
+        <div class="field-name"> B</div> 
 
-    </div>
+    </div> -->
+    <?php 
+        include('pages/director/view-department.php');
+    ?>
+    
     <form>
-        <label for="search-department">Choose department</label>
-        <input list="departments" id="search-department" name="deparment" required>
+        <label for="search-department">Name the department</label>
+        <input type="text" id="search-department" name="deparment" required>
 
-        <label for="search-user">Choose user</label>
+        <label for="department-description">Description</label>
+        <input type="text" id="department-description" name="description"><br>
 
-        <input list="users" id="search-user" name="deparment" required>
+        <label for="search-user">Choose department head</label>
 
-        <button id="add-dh" type="button"> Add</button>
+        <input type="text" id="search-user" name="user" required><br>
+
+        <button id="add-dh" type="submit"> Add</button>
 
 
     </form>
