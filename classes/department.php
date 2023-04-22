@@ -70,5 +70,19 @@ class Department {
     $stmt->execute();
     return $stmt->rowCount();
   }
+
+  public function delete_department_head($id) {
+    $stmt = $this->db->prepare('SELECT * FROM departmentheads WHERE DepartmentId = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $dep_id = $result['DepartmentHeadId'];
+    $stmt->closeCursor();
+    $stmt = $this->db->prepare('DELETE FROM departmentheads WHERE DepartmentId = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $stmt->closeCursor();
+    return $dep_id;
+  }
 }
 ?>

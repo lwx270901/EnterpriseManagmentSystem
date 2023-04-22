@@ -89,6 +89,19 @@ class Employee {
     $stmt->closeCursor();
   }
 
+  public function update_employee_to_normal($id) {
+    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, Level = :lv, DepartmentId = :department_id WHERE EmployeeId = :id');
+    $stmt->bindParam(':id', $id);
+    $roleId = 3;
+    $level = 1;
+    $department_id = 1;
+    $stmt->bindParam(':roleId', $roleId);
+    $stmt->bindParam(':lv', $level);
+    $stmt->bindParam(':department_id', $department_id);
+    $stmt->execute();
+    $stmt->closeCursor();
+  }
+
   public function delete_employee($id) {
     $stmt = $this->db->prepare('DELETE FROM employees WHERE EmployeeId = :id');
     $stmt->bindParam(':id', $id);
