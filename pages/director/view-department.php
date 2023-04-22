@@ -65,3 +65,5 @@ if($departments) { ?>
  ";
 } ?>
 </section>
+
+<script type="module" src="pages/director/view-department.js"></script>
