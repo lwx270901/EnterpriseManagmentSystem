@@ -1,5 +1,5 @@
-<!-- (class for managing user accounts) -->
 <?php
+// class for managing user accounts
 class User {
   private $db;
 
@@ -32,6 +32,10 @@ class User {
     $stmt->execute(array($_SESSION['user_id']));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['role'];
+  }
+
+  public function get_name_by_id($user_id) {
+    
   }
 }
 ?>
