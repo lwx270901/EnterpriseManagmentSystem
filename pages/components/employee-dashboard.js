@@ -12,7 +12,7 @@ $.ajax({
                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
                 $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                $("#assigners").append(`<div class="element"> ${value.AssignedEmployeeId}</div>`);
+                $("#assigners").append(`<div class="element"> ${value.CreatedBy}</div>`);
             });
 
             showActionButton();
