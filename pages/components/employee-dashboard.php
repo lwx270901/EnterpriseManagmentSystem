@@ -2,7 +2,8 @@
     <div class="field-name col px-0" id="task-id"> ID</div>
     <div class="field-name col px-0" id="task-desc"> Task </div>
     <div class="field-name col px-0" id="deadline"> Deadline </div>
-    <div class="field-name col px-0" id="assigners"> Assigned by </div>
+    <div class="field-name col px-0" id="assigners"> Assigner </div>
+    <div class="field-name col px-0" id="status"> Status </div>
     <div class="field-name col px-0 action ">Action </div>
 </div>
 
