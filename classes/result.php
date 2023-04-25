@@ -1,5 +1,5 @@
-<!-- (class for managing task results) -->
 <?php
+// class for managing task results
 class Result {
   private $db;
 

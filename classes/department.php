@@ -1,5 +1,5 @@
-<!-- class for managing departments -->
 <?php
+// class for managing departments
 class Department {
   private $db;
 
