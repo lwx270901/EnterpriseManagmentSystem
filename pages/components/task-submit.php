@@ -3,7 +3,11 @@
         <div class="element comment-section">
             <label for="Comment">Comment</label>
             <textarea wrap="off" placeholder="enter comment" name="comment" autofocus> </textarea>
-        </div>  
+        </div>
+        <div class="element" id="attachment-container">
+            <b>Your submitted attachment: </b>
+            <div id="attachment"></div>
+        </div>
         <div class="element submit-file">
             <input type="file" name="file" required>
         </div>
