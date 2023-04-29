@@ -23,10 +23,10 @@ class Task {
   }
 
   public function update_task_status($task_id, $status, $comment = '') {
-    $stmt = $this->db->prepare('UPDATE tasks SET status = :status, comment = :comment WHERE id = :id');
-    $stmt->bindParam(':status', $status);
-    $stmt->bindParam(':comment', $comment);
-    $stmt->bindParam(':id', $task_id);
+    $stmt = $this->db->prepare('CALL Procedure_UpdateTaskByTaskId(:TaskId, :Status, :Comment)');
+    $stmt->bindParam(':TaskId', $task_id);
+    $stmt->bindParam(':Status', $status);
+    $stmt->bindParam(':Comment', $comment);
     $stmt->execute();
     return $stmt->rowCount();
   }

@@ -1,6 +1,6 @@
 USE enterprise_db;
 
-INSERT INTO departmentheads (DepartmentHeadId, DepartmentId)
+INSERT INTO DepartmentHeads (DepartmentHeadId, DepartmentId)
 VALUES 
     (2, 1),
     (3, 2),

@@ -33,9 +33,4 @@ class User {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['role'];
   }
-
-  public function get_name_by_id($user_id) {
-    
-  }
 }
-?>
