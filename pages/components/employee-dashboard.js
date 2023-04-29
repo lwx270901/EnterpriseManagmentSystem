@@ -8,6 +8,7 @@ $.ajax({
     complete: function (data) {
         if (data.status === 200) {
             const tasks = JSON.parse(data.responseText);
+            console.log(tasks);
             $.each(tasks, function (key, value) {
                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);

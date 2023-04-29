@@ -30,6 +30,7 @@ submitBtn.addEventListener('click', (event) => {
 
       // Redirect the user to the employee dashboard
       window.location.href = 'index.php?func=employee-dashboard';
+
     } else {
       console.log('Submission failed.');
     }

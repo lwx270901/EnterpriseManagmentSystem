@@ -22,6 +22,7 @@ class Task {
     return $this->db->lastInsertId();
   }
 
+
   public function update_task_status($task_id, $status) {
     $stmt = $this->db->prepare('CALL Procedure_UpdateTaskByTaskId(:TaskId, :Status)');
     $stmt->bindParam(':TaskId', $task_id);
