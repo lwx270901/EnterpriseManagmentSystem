@@ -1,6 +1,6 @@
 USE enterprise_db;
 
-INSERT INTO Roles (RoleId, Description)
+INSERT INTO Roles (RoleId, RoleDescription)
 VALUES 
 	(1, 'Director'),
     (2, 'Department head'),
