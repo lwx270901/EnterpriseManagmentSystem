@@ -29,4 +29,11 @@ class Task {
     $stmt->execute();
     return $stmt->rowCount();
   }
+
+  public function get_tasks_by_department_head($dh_id){
+    $stmt = $this->db->prepare('CALL Procedure_GetTasksByDepHeadId (:dh_id);');
+    $stmt->bindParam(':dh_id', $dh_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

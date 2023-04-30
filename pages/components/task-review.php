@@ -13,13 +13,14 @@
         <div class="result-view">
             <div class="result-comment">
                 <div class="comment-header">
-                    Employee's comment
+                    Employee's submission
                 </div>
                 <div class="row container">
-                    <div class="col-8 comment">
+                    <div class="col-8 comment" id="employee-comment">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos similique molestias suscipit nulla consequatur autem sunt ducimus quisquam, quae aliquid.
                     </div>
-                    <div class="col-4 result-file">
+                    <div class="col-4 result-file" id="attachment-container">
+                        <div id="attachment"></div>
                         <button class="btn btn-primary" id="download-btn"><i class="fa fa-download"></i> Download employee's file</button>
                     </div>
                 </div>
