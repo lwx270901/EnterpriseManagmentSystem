@@ -20,15 +20,17 @@ submitBtn.addEventListener('click', (event) => {
   const xhr = new XMLHttpRequest();
   
   // Set up the request
-  xhr.open('POST', '/pages/employee/submit-tasks.php');
-  
+  xhr.open('POST', '/pages/employee/submit-task.php');
+
   // Set up the response handler
-  xhr.onload = function() {
+  xhr.onload = function () {
     if (xhr.status === 200) {
       console.log('Submission successful!');
-      console.log(xhr);
+      alert('Submission successful!');
+
       // Redirect the user to the employee dashboard
-      // window.location.href = 'employee-dashboard.php';
+      window.location.href = 'index.php?func=employee-dashboard';
+
     } else {
       console.log('Submission failed.');
     }

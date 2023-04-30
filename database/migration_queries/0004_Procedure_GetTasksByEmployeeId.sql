@@ -8,6 +8,7 @@ BEGIN
 	SELECT 
     	Tasks.TaskId,  
         Tasks.Description,
+        Tasks.CreatedDate,
         Tasks.DueDate,
         Tasks.Status,
         Employees.EmployeeId AS AssignerId,
