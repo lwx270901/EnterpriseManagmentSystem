@@ -20,6 +20,7 @@ $loginFailedMsg = "";
 function saveSessionInfoOnLoginSuccess($queryResult) {
     $_SESSION['user_id'] = $queryResult['user_id'];
     $_SESSION['user'] = $queryResult['username'];
+    $_SESSION['dep_id'] = $queryResult['department_id'];
 
     switch ($queryResult['role_id']){
         case(1):

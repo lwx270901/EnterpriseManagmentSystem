@@ -6,19 +6,26 @@ export function handleSearch(searchBox, searchResults, url) {
         searchResults.empty();
         searchResults.hide();
     }
+
     // Them field data vao de query
     // No dang luc nao echo nen chua empty luc ko search
     $.ajax({
         url: url,
-        method: "GET",
+        method: "POST",
+        data: {
+            query: query
+        },
         success: function (response) {
-            $.each(response, function (index, r) {
-                var searchItem = $("<div>" + r.name + "</div>");
+            var data = JSON.parse(response);
+
+            $.each(data, function (index, r) {
+                var searchItem = $("<option value='" + r.EmployeeId + "'>" + r.Username + "</option>");
                 searchItem.on("click", function (e) {
                     searchBox.val($(this).text()); // set input value to selected option
                     searchResults.hide();
-                });
+                });                
                 searchResults.append(searchItem);
+                searchBox.append(searchItem);
             });
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -28,5 +35,4 @@ export function handleSearch(searchBox, searchResults, url) {
     })
     searchResults.show();
     query = "";
-
 }

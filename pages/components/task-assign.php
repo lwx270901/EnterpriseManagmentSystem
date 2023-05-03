@@ -22,9 +22,9 @@
             <div class="col-md-2 employee">
                 <label for="employee" class="form-label">Employee</label>
                 <div class="input-group">
-                    <input class="form-control" type="text" name="employee" id="searchEmp" placeholder="Search employee...">
-                    <button class="btn btn-outline-secondary" type="button" id="assign-btn">Assign</button>
-                </div>
+                    <select class="form-control" type="text" name="employee" id="searchEmp" placeholder="Search employee..."></select>
+                    <button class="btn btn-outline-secondary" type="submit" id="assign-btn">Assign</button>
+                </div>  
                 <div id="employee-results"></div>
             </div>
         </div>
