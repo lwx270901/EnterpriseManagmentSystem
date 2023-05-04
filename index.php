@@ -46,7 +46,6 @@ $user_role = $_SESSION['role']
   <section>
     <?php
     include_once 'templates/footer.php';
-
     ?>
   </section>
   

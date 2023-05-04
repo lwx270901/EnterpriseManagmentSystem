@@ -68,9 +68,9 @@
         </div>
         <div class="col-lg nav-bar-container">
             <ul class="nav-bar row g-0 px-0  ">
-                <li class="col-6 px-0"><a href="?func=employee-dashboard">Dashboard</a></li>
-                <li class="col-6 px-0"><a href="?func=logout">Logout</a></li>
-
+                <li class="col-4 px-0"><a href="?func=employee-dashboard">Dashboard</a></li>
+                <li class="col-4 px-0"><a href="?func=logout">Logout</a></li>
+                <li class="col-4 px-0"><a href="?func=task-result">Task Result</a></li>
             </ul>
         </div>
         <div class="user col-lg-2 col-sm-0">
@@ -87,7 +87,6 @@
                 </span>
             </div>
         </div>
-
     </div>
 </div>
 <?php endif; ?>
