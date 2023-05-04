@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Task Review</title>
 </head>
+
 <body>
     <div class="container my-5">
         <div class="result-view">
@@ -17,18 +19,23 @@
                 </div>
                 <div class="row container">
                     <div class="col-8 comment" id="employee-comment">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos similique molestias suscipit nulla consequatur autem sunt ducimus quisquam, quae aliquid.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos similique molestias suscipit nulla
+                        consequatur autem sunt ducimus quisquam, quae aliquid.
                     </div>
                     <div class="col-4 result-file" id="attachment-container">
                         <div id="attachment"></div>
-                        <button class="btn btn-primary" id="download-btn"><i class="fa fa-download"></i> Download employee's file</button>
+                        <button class="btn btn-primary" id="download-btn"><i class="fa fa-download"></i> Download
+                            employee's file</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="submit-card mt-5">
-            <form action="">
+        <div class="submit-card review-card mt-5">
+            <div class="comment-header">
+                Review
+            </div>
+            <form action="" class="review-form">
                 <div class="mb-3">
                     <label for="Comment" class="form-label">Comment</label>
                     <textarea class="form-control" placeholder="enter comment" name="comment" autofocus></textarea>
@@ -49,7 +56,18 @@
             </form>
         </div>
     </div>
-    
+
     <script type="module" src="pages/components/task-review.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </body>
+<style>
+    .review-card {}
+
+    .btn-group {
+        margin: 10px 0px;
+    }
+
+    .review-form {
+        margin: 10px 20px;
+    }
+</style>
