@@ -1,7 +1,6 @@
 // Get references to the relevant DOM elements
 const form = document.querySelector('form');
 const submitBtn = document.querySelector('#submit-btn');
-const closeBtn = document.querySelector('#close-btn');
 
 // Add an event listener to the submit button
 submitBtn.addEventListener('click', (event) => {
@@ -21,14 +20,17 @@ submitBtn.addEventListener('click', (event) => {
   const xhr = new XMLHttpRequest();
   
   // Set up the request
-  xhr.open('POST', 'submit.php');
-  
+  xhr.open('POST', '/pages/employee/submit-task.php');
+
   // Set up the response handler
-  xhr.onload = function() {
+  xhr.onload = function () {
     if (xhr.status === 200) {
       console.log('Submission successful!');
+      alert('Submission successful!');
+
       // Redirect the user to the employee dashboard
-      window.location.href = 'employee-dashboard.php';
+      window.location.href = 'index.php?func=employee-dashboard';
+
     } else {
       console.log('Submission failed.');
     }
@@ -38,9 +40,3 @@ submitBtn.addEventListener('click', (event) => {
   xhr.send(formData);
 });
 
-// Add an event listener to the close button
-closeBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  // Redirect the user to the employee dashboard
-  window.location.href = 'employee-dashboard.php';
-});

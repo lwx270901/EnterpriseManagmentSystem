@@ -12,18 +12,21 @@
 }
 
 .field-name {
-    text-align: center;
+    
     display: inline-block;
+    align-items: center;
     font-size: 2rem;
 
 }
 
 .element {
+
     font-size: 1rem;
     padding: var(--table-padding);
 }
 
 .open-btn {
+
     background-color: #4CAF50;
     /* Green */
     border: none;
@@ -31,7 +34,7 @@
     padding: var(--table-padding);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 1rem;
     margin: 10px 2px;
     cursor: pointer;
@@ -54,4 +57,39 @@
     width: 100%;
     line-height: 1rem;
     height: 10rem;
+}
+.result-view {
+    display: none;
+    background-color: var(--section-gray);
+    max-width: var(--max-width);
+    margin: auto;
+}
+.result-comment {
+    width: 100%;
+    height:10rem;
+}
+.comment-header {
+    padding: 0px 25px;
+    color: var(--secondary-text);
+    font-size: 2rem;
+}
+.comment {
+    font-size: 1.25rem;
+    padding: 0px 20px
+}
+#download-btn:hover {
+    background-color: royalblue;
+}
+#download-btn {
+    background-color: dodgerblue;
+    width: 100%;
+    border: none;
+    color: var(--main-text);
+    font-size: 1.5rem;
+    height: 5rem;
+}
+#error {
+    font-size: 1.5rem;
+    color: red;
+    /* padding: 0px 20px; */
 }

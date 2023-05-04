@@ -1,5 +1,5 @@
 <?php
-//class for managing task reviews
+// class for managing task reviews
 class Review {
   private $db;
 

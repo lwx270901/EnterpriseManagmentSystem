@@ -2,27 +2,25 @@
 // and append too appropriate column
 
 $.ajax({
-    url: "/pages/employee/load-task.php",
+    url: "/pages/department-head/load-task.php",
     dataType: "json",
     async: true,
     complete: function (data) {
         if (data.status === 200) {
             const tasks = JSON.parse(data.responseText);
-            console.log(tasks);
             $.each(tasks, function (key, value) {
                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
                 $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
+                $("#employee").append(`<div class="element"> ${value.EmployeeName}</div>`);
                 $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
+                $("#last-updated").append(`<div class="element"> ${value.LastUpdated}</div>`);
             });
 
             showActionButton();
         }
     }
 });
-
-////////////////////////////////////
 
 function showActionButton() {
     // Selecting children
@@ -53,12 +51,30 @@ function showStatus(status) {
 }
 
 
+////////////////////////////////////
+// Selecting children
+var actionContainer = $(".table-head.action-container");
+var taskIDs = $("#task-id").children(); // used for query
+var tasks = $("#task-desc").children();
+
+$.each(tasks, function (index, task) {
+
+    //add button for each
+    var action = $(".action");
+    $('<button/>', {
+        text: 'Open',
+        class: 'open-btn',
+        id: 'open-btn-' + index
+    }).wrap("<div/>").parent().appendTo(action);
+
+});
 //Handling Button
 var target = "";
 $(".table-header").click(function (event) {
     if ($(event.target).attr('id').includes("open-btn-")) {
         //front-end stuff
         $(".submit-card").show();
+        $(".result-view").show();
         $(".open-btn").each(function (_, btn) {
             $(btn).css("background-color", "#4CAF50");
         });
@@ -72,7 +88,7 @@ $(".table-header").click(function (event) {
 
         $.ajax({
             type: 'POST',
-            url: '/pages/employee/load-result.php',
+            url: '/pages/department-head/load-result.php',
             data: {
                 task_id: taskId
             },
@@ -94,45 +110,25 @@ $(".table-header").click(function (event) {
 });
 
 function fillLoadedResultToForm(response) {
-    $("textarea[name='comment']")[0].value = response.Comment;
+    $("#employee-comment")[0].innerHTML = response.Comment;
     $("#attachment-container").show();
-    $("#attachment")[0].innerHTML = response.ResultAttachmentLink + ' (' + response.LastUpdated + ')';
+    $("#attachment")[0].innerHTML = response.ResultAttachmentLink;
 }
 
 function clearInputForm() {
-    $("textarea[name='comment']")[0].value = "";
+    $("#employee-comment")[0].innerHTML = "";
     $("#attachment-container").hide();
 }
 
 $("#close-btn").click(function (event) {
     $(".submit-card").hide();
-});
-
-$("#submit-btn").click(function (event) {
-    let taskPosition = target.attr('id').at(-1);
-    let taskId = parseInt($("#task-id").children()[taskPosition].innerText);
-    let filename = $("input[name='file']").val().replace(/C:\\fakepath\\/i, '');
-    let comment = $("textarea[name='comment']").val();
-
-    var data = {
-        task_id: taskId,
-        status: 3, // Denoting finished task
-        comment: comment,
-        filename: filename
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/pages/employee/submit-task.php',
-        data: data,
-        success: function (response) {
-            console.log('response = ', response);
-        },
-        error: function (xhr, status, error) {
-            console.log('error = ', error);
-        }
+    $(".open-btn").each(function (_, btn) {
+        $(btn).css("background-color", "#4CAF50");
     });
 });
 
 //Handle back-end for submit btn with chosen target
 //Check target index with target.attr('id') (open-btn-index)
 //From index => get ID from index with taskIDs[index] above
+
+//From ID => query ID employee 

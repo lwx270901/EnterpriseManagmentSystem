@@ -36,7 +36,7 @@
         </div>
         <div class="col-lg nav-bar-container">
             <ul class="nav-bar row g-0 px-0  ">
-                <li class="col-4 px-0"><a href="?func=deparment-dashboard">Dashboard</a></li>
+                <li class="col-4 px-0"><a href="?func=department-dashboard">Dashboard</a></li>
                 <li class="col-4 px-0"><a href="?func=assign-task">Assign task</a></li>
                 
                 <li class="col-4 px-0"><a href="?func=logout">Logout</a></li>

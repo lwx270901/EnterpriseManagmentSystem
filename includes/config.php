@@ -1,4 +1,6 @@
 <?php
+// (configuration file for connecting to the database)
+
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'enterprise_db');

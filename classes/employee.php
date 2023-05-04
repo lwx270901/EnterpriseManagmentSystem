@@ -1,5 +1,5 @@
 <?php
-//class for managing employees
+// class for managing employees
 class Employee {
   private $db;
 
