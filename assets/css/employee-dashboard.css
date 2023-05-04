@@ -33,7 +33,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 1rem;
-    margin: 4px 2px;
+    margin: 10px 2px;
     cursor: pointer;
 }
 .open-btn:checked {
@@ -55,4 +55,3 @@
     line-height: 1rem;
     height: 10rem;
 }
-

@@ -10,16 +10,16 @@
 </head>
 <body>
     <div class="container my-5">
-        <div class="row g-0 assign-task">
-            <div class="col-md-8 description">
+        <div class="col g-0 assign-task">
+            <div class="row-md-8 description">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" placeholder="enter description..." name="description" autofocus></textarea>
             </div>
-            <div class="col-md-2 deadline">
+            <div class="row-md-2 deadline">
                 <label for="deadline" class="form-label">Deadline</label>
                 <input class="form-control" type="datetime-local" name="deadline" id="deadline">
             </div>
-            <div class="col-md-2 employee">
+            <div class="row-md-2 employee">
                 <label for="employee" class="form-label">Employee</label>
                 <div class="input-group">
                     <select class="form-control" type="text" name="employee" id="searchEmp" placeholder="Search employee..."></select>
