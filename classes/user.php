@@ -34,11 +34,10 @@ class User {
     return $row['role'];
   }
 
-  public function get_name_like_input($dep_id, $dep_head_id, $name_string){
-    $stmt = $this->db->prepare('CALL Procedure_GetUsersFromDepLikeName (:dep_id, :dep_head_id, :name_string)');
+  public function get_name_like_input($dep_id, $dep_head_id){
+    $stmt = $this->db->prepare('CALL Procedure_GetUsersFromDepLikeName (:dep_id, :dep_head_id)');
     $stmt->bindParam(':dep_id', $dep_id);
     $stmt->bindParam(':dep_head_id', $dep_head_id);
-    $stmt->bindParam(':name_string', $name_string);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
