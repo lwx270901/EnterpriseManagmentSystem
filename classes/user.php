@@ -15,7 +15,7 @@ class User {
     // Fetch the results and return the user's ID and role if the username and password are valid
     if ($stmt->rowCount() == 1) {
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      return array('user_id' => $row['EmployeeId'], 'role_id' => $row['RoleId'], 'username' => $row['UserName']);
+      return array('user_id' => $row['EmployeeId'], 'role_id' => $row['RoleId'], 'username' => $row['UserName'], 'department_id' =>$row['DepartmentId']);
     } else {
       return false;
     }
@@ -32,5 +32,13 @@ class User {
     $stmt->execute(array($_SESSION['user_id']));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['role'];
+  }
+
+  public function get_name_like_input($dep_id, $dep_head_id){
+    $stmt = $this->db->prepare('CALL Procedure_GetUsersFromDepLikeName (:dep_id, :dep_head_id)');
+    $stmt->bindParam(':dep_id', $dep_id);
+    $stmt->bindParam(':dep_head_id', $dep_head_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

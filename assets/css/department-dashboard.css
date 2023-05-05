@@ -12,18 +12,21 @@
 }
 
 .field-name {
-    text-align: center;
+    
     display: inline-block;
+    align-items: center;
     font-size: 2rem;
 
 }
 
 .element {
+
     font-size: 1rem;
     padding: var(--table-padding);
 }
 
 .open-btn {
+
     background-color: #4CAF50;
     /* Green */
     border: none;
@@ -31,9 +34,9 @@
     padding: var(--table-padding);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 1rem;
-    margin: 4px 2px;
+    margin: 10px 2px;
     cursor: pointer;
 }
 .open-btn:checked {

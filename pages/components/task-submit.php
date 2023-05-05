@@ -12,7 +12,7 @@
 <body>
     <div class="container my-5">
         <div class="submit-card">
-            <form action="">
+            <form action="" class="submit-form">
                 <div class="mb-3">
                     <label for="Comment" class="form-label">Comment</label>
                     <textarea class="form-control" placeholder="enter comment" name="comment" autofocus></textarea>
@@ -38,3 +38,14 @@
 </body>
 
 </html>
+
+<style>
+    .btn-group {
+    margin: 10px 0px;
+}
+
+.submit-form {
+    margin: 10px 20px;
+}
+
+</style>
