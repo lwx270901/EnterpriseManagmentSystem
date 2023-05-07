@@ -8,7 +8,7 @@ class Department {
   }
 
   public function get_all_departments() {
-    $stmt = $this->db->prepare('SELECT * FROM departments');
+    $stmt = $this->db->prepare('CALL Procedure_GetAllDepartments();');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -25,9 +25,12 @@ class Department {
     $stmt->bindParam(':dep_id', $dep_id);
     $stmt->execute();
     $dep_head = $stmt->fetch(PDO::FETCH_ASSOC);
-    $dep_head_id = $dep_head['DepartmentHeadId'];
-    $stmt->closeCursor();
-    return $dep_head_id;
+
+    if ($dep_head){
+      $dep_head_id = $dep_head['DepartmentHeadId'];
+      $stmt->closeCursor();
+      return $dep_head_id;
+    }
   }
 
   public function get_department_by_name($inpText) {
@@ -38,11 +41,11 @@ class Department {
     return $allDep;
   }
 
-  public function create_department($name, $description) {
-
-    $stmt = $this->db->prepare('INSERT INTO departments (DepartmentName, DepartmentDescription) VALUES (:name, :description)');
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':description', $description);
+  public function insert_department($name, $description, $dep_head_id) {
+    $stmt = $this->db->prepare('CALL Procedure_AddNewDepartment(:dep_name, :dep_desc, :dep_head_id)');
+    $stmt->bindParam(':dep_name', $name);
+    $stmt->bindParam(':dep_desc', $description);
+    $stmt->bindParam(':dep_head_id', $dep_head_id);
     $stmt->execute();
     return $this->db->lastInsertId();
   }

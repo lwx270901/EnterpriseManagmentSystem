@@ -33,9 +33,7 @@ if($departments) { ?>
         $department_id = $department["DepartmentId"];
         $department_name = $department["DepartmentName"];
         $department_description = $department["DepartmentDescription"];
-        $department_head_id = $department_control->get_department_head($department_id);
-        $department_head = $employee_control->get_employee_by_id($department_head_id);
-        $department_head_name = strval($department_head["FirstName"]) . ' ' . strval($department_head["LastName"]);
+        $department_head_name = $department["DepartmentHeadName"];   
         
         ?>
         <tr id="<?php echo $i; ?>">
