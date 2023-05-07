@@ -28,14 +28,10 @@ class Employee {
   }
 
   public function get_employee_by_name($inpText) {
-    $stmt = $this->db->prepare('SELECT * FROM employees WHERE CONCAT(FirstName," ",LastName)  LIKE :input');
-    $stmt->execute(['input' => '' . $inpText . '%']);
-    $allemp = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // if (!is_null($inpText) && is_null($allemp)) {
-    //   return "No employee with this name!";
-    // }
-    $stmt->closeCursor();
-    return $allemp;
+    $stmt = $this->db->prepare('CALL Procedure_GetUsersLikeName(:inpText)');
+    $stmt->bindParam(':inpText', $inpText);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function get_employee_by_full_name($name) {
