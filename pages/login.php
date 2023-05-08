@@ -45,8 +45,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // $user->login() returns an array for success operation and a false value for failed operation
-    $loginQueryResult = $user->login($username, md5($password));
+    // $user_control->login() returns an array for success operation and a false value for failed operation
+    $loginQueryResult = $user_control->login($username, md5($password));
 
     if (!is_array($loginQueryResult)) {
         $loginFailedMsg = "Login failed, check your username and password!";
