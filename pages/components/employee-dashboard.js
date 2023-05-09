@@ -1,26 +1,84 @@
 // Creating children: Query from database, create children element
 // and append too appropriate column
+let currentPage = 1;
+const pageSize = 10;
 
-$.ajax({
-    url: "/pages/employee/load-task.php",
-    dataType: "json",
-    async: true,
-    complete: function (data) {
-        if (data.status === 200) {
-            const tasks = JSON.parse(data.responseText);
-            console.log(tasks);
-            $.each(tasks, function (key, value) {
-                $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-                $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-                $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-                $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-            });
+// Load first page of tasks
+loadTasks(currentPage);
 
-            showActionButton();
+function loadTasks(page) {
+    $.ajax({
+        url: "/pages/employee/load-task.php",
+        dataType: "json",
+        async: true,
+        data: {
+            page: page,
+            pageSize: pageSize
+        },
+        complete: function (data) {
+            if (data.status === 200) {
+                const tasks = JSON.parse(data.responseText);
+                console.log(tasks);
+                $.each(tasks, function (key, value) {
+                    $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
+                    $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
+                    $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
+                    $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
+                    $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
+                });
+                
+                showActionButton();
+            }
         }
+    });
+}
+
+
+
+$("#prev-btn").click(function() {
+    if (currentPage > 1) {
+        currentPage--;
+        clearTasks();
+        loadTasks(currentPage);
     }
 });
+
+$("#next-btn").click(function() {
+    currentPage++;
+    clearTasks();
+    loadTasks(currentPage);
+});
+
+function clearTasks() {
+    $("#task-id").empty();
+    $("#task-desc").empty();
+    $("#deadline").empty();
+    $("#assigners").empty();
+    $("#status").empty();
+}
+
+
+
+// $.ajax({
+//     url: "/pages/employee/load-task.php",
+//     dataType: "json",
+//     async: true,
+//     complete: function (data) {
+//         if (data.status === 200) {
+//             const tasks = JSON.parse(data.responseText);
+//             console.log(tasks);
+//             $.each(tasks, function (key, value) {
+//                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
+//                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
+//                 $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
+//                 $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
+//                 $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
+//             });
+
+//             showActionButton();
+//         }
+//     }
+// });
 
 ////////////////////////////////////
 
