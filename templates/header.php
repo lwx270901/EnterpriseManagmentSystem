@@ -5,16 +5,15 @@
         <div class="col-lg-2 col-sm-0">
         </div>
         <div class="col-lg nav-bar-container">
-            <ul class="nav-bar row g-0 px-0  ">
-                <li class="col-6 px-0"><a href="?func=director-dashboard">Dashboard</a></li>
+            <ul class="nav-bar row g-0 px-0 py-auto">
+                <li class="col-6 px-0"><a href="?func=director-dashboard">Department Management</a></li>
                 <li class="col-6 px-0"><a href="?func=logout">Logout</a></li>
-
             </ul>
         </div>
         <div class="user col-lg-2 col-sm-0">
             <div class="row gx-0 px-0">
                 <div class="col-2 px-0">
-                    <img width="60px" height="60px" src="./assets//images/user.png" alt="">
+                    <img width="60px" height="60px" src="./assets/images/user.png" alt="">
                 </div>
                 <span class="user-text col px-0">
                     <span id="user-name">Username</span>
