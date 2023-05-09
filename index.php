@@ -16,7 +16,10 @@ $user_role = $_SESSION['role']
   <link rel="stylesheet" href="./assets/css/main.css">
   <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/js/bootstrap.js">
   <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.css">
+  <link rel="icon" href="static/projectname/favicon.ico">
   <script src="jquery/jquery-3.6.4.min.js"></script>
+  <script src="https://kit.fontawesome.com/b15b05a753.js" crossorigin="anonymous"></script>
+
   <title>Document</title>
 </head>
 

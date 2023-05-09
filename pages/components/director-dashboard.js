@@ -1,19 +1,54 @@
 
-import {handleSearch} from "../../assets/js/handleSearch.js"
+import { handleSearchForDirector } from "../../assets/js/handleSearch.js";
+import { handleAddDep } from "../../assets/js/handleAddDep.js";
+import { handleDelDep } from "../../assets/js/handleDelDep.js";
+
 var searchDep = $("#search-department");
-var depResults = $("#dep-results");
+var description = $("#department-description");
 var searchUser = $("#search-user");
-var userResults = $("#user-results");
+var userResultDropdown = $("#user-result-dropdown");
+var selectedUser = $("#selected-user");
 
-// Director add department head o day, xu ly database = ajax thoi.
-$('#add-dh').on("click", function(e) {
-    $('#department-name').append($("<div>" + searchDep.val() + "</div>"))
-    $('#department-head').append($("<div>" + searchUser.val() + "</div>"))
+$('#add-dh').on("click", function (e) {
+    e.preventDefault();
 
+    if (!searchDep.val().trim()) {
+        alert("Please fill in the department's name");
+        return;
+    }
+    if (!description.val().trim()) {
+        alert("Please fill in the department's description");
+        return;
+    }
+    handleAddDep(searchDep.val(), description.val(), selectedUser.val(), "pages/director/add-department.php");
 });
-searchDep.on("input", function(e) {
-    handleSearch(searchDep, depResults, "./templates/search-department.php");
-});
-searchUser.on("input", function(e) {
-    handleSearch(searchUser, userResults, "./templates/search-user.php");
+
+let allButtons = document.getElementsByClassName('delete-btn');
+for (let button of allButtons) {
+    button.addEventListener('click', (e) => {
+        var clickedElement = e.target;
+        var clickedRow = clickedElement.parentNode.parentNode.parentNode.parentNode.id;
+        var data = document.getElementById(clickedRow).querySelectorAll('.dep_id');
+        var id = data[0].innerHTML;
+        e.preventDefault();
+        handleDelDep(id, "pages/director/delete-department.php");
+    });
+}
+
+// searchDep.keyup(function () {
+//     let searchText = $(this).val();
+//     if (this.value == '') {
+//         depResults.hide();
+//     } else {
+//     handleSearch(searchDep, searchText, depResults, "pages/director/search-department.php");
+//     }
+// });
+
+searchUser.keyup(function () {
+    if (this.value == '') {
+        userResultDropdown.hide();
+    } else {
+        handleSearchForDirector(searchUser, userResultDropdown, "pages/director/search-user.php", selectedUser);
+    }
 })
+
