@@ -2,6 +2,12 @@
 $task_id = $_GET['id'];
 $task = $task_control->get_task_by_task_id($task_id)[0];
 
+if ($_SESSION['role'] == 'director' || $_SESSION['role'] == 'department_head') {
+
+} else {
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +24,7 @@ $task = $task_control->get_task_by_task_id($task_id)[0];
 </style>
 
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 1rem">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
@@ -79,6 +85,8 @@ $task = $task_control->get_task_by_task_id($task_id)[0];
                         </div>
                     </div>
                 <?php endif; ?>
+                <!-- Only displays the submission form for normal employee -->
+                <?php if ($_SESSION['role'] == 'employee') :?>
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title"><?php echo $task['Status'] == 3 ? 'Edit Submission' : 'Submit task'; ?></h5>
@@ -112,6 +120,7 @@ $task = $task_control->get_task_by_task_id($task_id)[0];
                         </form>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
-// Creating children: Query from database, create children element
-// and append too appropriate column
+import { handleSearchForDepHead } from "../../assets/js/handleSearch.js"
+var searchUser = $("#search-user");
+var selectedUser = $("#selected-user");
+var userResultDropdown = $("#user-result-dropdown");
 
 $.ajax({
     url: "/pages/department-head/load-task.php",
@@ -9,45 +11,52 @@ $.ajax({
         if (data.status === 200) {
             const tasks = JSON.parse(data.responseText);
             $.each(tasks, function (key, value) {
-                $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-                $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-                $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                $("#employee").append(`<div class="element"> ${value.EmployeeName}</div>`);
-                $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-                $("#last-updated").append(`<div class="element"> ${value.LastUpdated}</div>`);
+                $("#tasks-list").append(`
+                <div class="card" style="margin: 0.5rem 2rem 0.5rem 2rem"> 
+                    <div class="card-body" style="display: flex">
+                        <div>
+                            <h5 class="card-title">Task ID: ${value.TaskId}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${value.Description}</h6>
+                            <span>Deadline: ${value.DueDate}</span>
+                        </div>
+                        <div id="task-status-btn" style="margin-left: auto; display: inherit; align-items: center; gap: 5px">
+                            <button type="button" class="${getButtonType(value.Status)}" stlye="width: 10rem"
+                            >${showStatus(value.Status)}</button>
+                            <a class="btn btn-primary action-btn" 
+                            href="/index.php?task-view&id=${value.TaskId}" 
+                            role="button"
+                            id="task-${value.TaskId}">
+                                View task
+                            </a>
+                        </div>
+                    </div>
+                </div>`);
             });
-
-            showActionButton();
         }
     }
 });
 
-function showActionButton() {
-    // Selecting children
-    var actionContainer = $(".table-head.action-container");
-    var taskIDs = $("#task-id").children(); // used for query
-
-    $.each(taskIDs, function (index, task) {
-        //add button for each
-        var action = $(".action");
-        $('<button/>', {
-            text: 'Open',
-            class: 'open-btn',
-            id: 'open-btn-' + index
-        }).wrap("<div/>").parent().appendTo(action);
-    });
-}
+const statusKv = {
+    1: "Not started",
+    2: "In progress",
+    3: "Completed",
+    4: "In Review",
+    5: "Verified"
+};
 
 function showStatus(status) {
-    const statusKv = {
-        1: "Not started",
-        2: "In progress",
-        3: "Completed",
-        4: "In Review",
-        5: "Verified"
-    };
-
     return statusKv[status];
+}
+
+function getButtonType(status){
+    switch (status){
+        case 1:
+            return "btn btn-info";
+        case 2:
+            return "btn btn-warning";
+        case 3:
+            return "btn btn-success";
+    }
 }
 
 
@@ -127,8 +136,53 @@ $("#close-btn").click(function (event) {
     });
 });
 
-//Handle back-end for submit btn with chosen target
-//Check target index with target.attr('id') (open-btn-index)
-//From index => get ID from index with taskIDs[index] above
+let allButtons = document.getElementsByClassName('delete-btn');
+for (let button of allButtons) {
+    button.addEventListener('click', (e) => {
+        var clickedElement = e.target;
+        var clickedRow = clickedElement.parentNode.parentNode.parentNode.parentNode.id;
+        var data = document.getElementById(clickedRow).querySelectorAll('.emp_id');
+        var id = data[0].innerHTML;
+        e.preventDefault();
 
-//From ID => query ID employee 
+        $.ajax({
+            type: 'POST',
+            url: '/pages/department-head/remove-user.php',
+            data: {
+                user_id: id
+            },
+            success: function (response) {
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.log('error = ', error);
+            }
+        })
+    });
+}
+
+$('#add-emp').on("click", function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '/pages/department-head/add-employee.php',
+        data: {
+            user_id: selectedUser.val()
+        },
+        success: function (response) {
+            window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.log('error = ', error);
+        }
+    })
+});
+
+searchUser.keyup(function () {
+    if (this.value == '') {
+        userResultDropdown.hide();
+    } else {
+        handleSearchForDepHead(searchUser, userResultDropdown, "pages/department-head/load-null-dep-user.php", selectedUser);
+    }
+})
