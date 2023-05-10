@@ -36,7 +36,6 @@ include('pages/director/view-department.php');
     <button id="add-dh" type="submit"> Add</button>
 </form>
 
-
 </div>
 <script type="module" src="pages/components/director-dashboard.js"></script>
 <script>
