@@ -1,101 +1,64 @@
-// Creating children: Query from database, create children element
-// and append too appropriate column
-let currentPage = 1;
-const pageSize = 10;
+const ITEMS_PER_PAGE = 5;
+var currentPage = 1;
+var totalPages = 1;
+var tasks = [];
 
-// Load first page of tasks
-loadTasks(currentPage);
-
-function loadTasks(page) {
-    $.ajax({
-        url: "/pages/employee/load-task.php",
-        dataType: "json",
-        async: true,
-        data: {
-            page: page,
-            pageSize: pageSize
-        },
-        complete: function (data) {
-            if (data.status === 200) {
-                const tasks = JSON.parse(data.responseText);
-                console.log(tasks);
-                $.each(tasks, function (key, value) {
-                    $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-                    $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-                    $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                    $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-                    $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-                });
-                
-                showActionButton();
-            }
+$.ajax({
+    url: "/pages/employee/load-task.php",
+    data: {
+        page: currentPage,
+        limit: ITEMS_PER_PAGE
+    },
+    dataType: "json",
+    async: true,
+    complete: function (data) {
+        if (data.status === 200) {
+            tasks = JSON.parse(data.responseText);
+            totalPages = Math.ceil(tasks.length / ITEMS_PER_PAGE);
+            renderTasks(currentPage, tasks);
+            renderPagination();
         }
-    });
-}
-
-
-
-$("#prev-btn").click(function() {
-    if (currentPage > 1) {
-        currentPage--;
-        clearTasks();
-        loadTasks(currentPage);
     }
 });
 
-$("#next-btn").click(function() {
-    currentPage++;
-    clearTasks();
-    loadTasks(currentPage);
-});
+function renderTasks(page, tasks) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageTasks = tasks.slice(start, end);
 
-function clearTasks() {
     $("#task-id").empty();
     $("#task-desc").empty();
     $("#deadline").empty();
     $("#assigners").empty();
     $("#status").empty();
+
+    $.each(pageTasks, function (key, value) {
+        $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
+        $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
+        $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
+        $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
+        $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
+    });
+
+    showActionButton(pageTasks);
 }
 
-
-
-// $.ajax({
-//     url: "/pages/employee/load-task.php",
-//     dataType: "json",
-//     async: true,
-//     complete: function (data) {
-//         if (data.status === 200) {
-//             const tasks = JSON.parse(data.responseText);
-//             console.log(tasks);
-//             $.each(tasks, function (key, value) {
-//                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-//                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-//                 $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-//                 $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-//                 $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-//             });
-
-//             showActionButton();
-//         }
-//     }
-// });
-
-////////////////////////////////////
-
-function showActionButton() {
+function showActionButton(pageTasks) {
     // Selecting children
     var actionContainer = $(".table-head.action-container");
-    var taskIDs = $("#task-id").children(); // used for query
+    var taskIDs = pageTasks.map(task => task.TaskId);
 
-    $.each(taskIDs, function (index, task) {
+    $(".action").empty();
+
+    $.each(taskIDs, function (index, taskId) {
         //add button for each
-        var action = $(".action");
         $('<button/>', {
             text: 'Open',
             class: 'open-btn',
             id: 'open-btn-' + index
-        }).wrap("<div/>").parent().appendTo(action);
+        }).wrap("<div/>").parent().appendTo($(".action"));
     });
+    renderPagination();
 }
 
 function showStatus(status) {
@@ -108,6 +71,27 @@ function showStatus(status) {
     };
 
     return statusKv[status];
+}
+
+function renderPagination() {
+    $("#pagination").empty();
+
+    if (totalPages > 1) {
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = $('<button/>', {
+                text: i,
+                class: 'page-btn' + (i === currentPage ? ' active' : '')
+            });
+
+            btn.on('click', function() {
+                currentPage = i;
+                renderTasks(currentPage, tasks);
+                renderPagination();
+            });
+
+            $("#pagination").append(btn);
+        }
+    }
 }
 
 
