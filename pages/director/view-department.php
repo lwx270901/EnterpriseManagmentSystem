@@ -11,7 +11,7 @@ th {
 
 <div class="container bg-white shadow">
     <div class="py-4 mt-5"> 
-    <div class='text-center pb-2'><h4>Manage Employees</h4></div>
+    <div class='text-center pb-2'><h4>Department Management</h4></div>
     <table style="width:100%" class="table text-center">
     <tr class="bg-dark">
         <th>S.No.</th>
