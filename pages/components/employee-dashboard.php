@@ -7,8 +7,7 @@
     <div class="field-name col px-0 action ">Action </div>
 </div>
 
-<button id="prev-btn" style="display: block; margin: 0 auto">Prev</button>
-<button id="next-btn" style="display: block; margin: 0 auto">Next</button>
+<div id="pagination"></div>
 
 
 <?php
