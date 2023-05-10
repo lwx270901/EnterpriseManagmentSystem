@@ -5,7 +5,7 @@ include_once 'includes/functions.php';
 
 
 $user_role = $_SESSION['role']
-  ?>
+?>
 <!-- this is index file -->
 <html lang="en">
 
@@ -31,6 +31,8 @@ $user_role = $_SESSION['role']
     <?php
     if (!isset($_SESSION['user'])) {
       header('Location:  pages/login.php');
+    } else if (isset($_GET['task-view'])) {
+      include 'pages/components/task-view.php';
     } else {
       switch ($user_role) {
         case 'director':
@@ -44,6 +46,7 @@ $user_role = $_SESSION['role']
           break;
       }
     }
+
     ?>
   </section>
   <section>
@@ -51,7 +54,7 @@ $user_role = $_SESSION['role']
     include_once 'templates/footer.php';
     ?>
   </section>
-  
+
 
 
 </body>

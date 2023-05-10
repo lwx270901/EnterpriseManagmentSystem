@@ -20,14 +20,27 @@ function loadTasks(page) {
                 const tasks = JSON.parse(data.responseText);
                 console.log(tasks);
                 $.each(tasks, function (key, value) {
-                    $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-                    $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-                    $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                    $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-                    $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
+                    $("#tasks-list").append(`
+                    <div class="card" style="margin: 0.5rem 2rem 0.5rem 2rem; width: 60rem"> 
+                        <div class="card-body" style="display: flex">
+                            <div>
+                                <h5 class="card-title">Task ID: ${value.TaskId}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${value.Description}</h6>
+                                <span>Deadline: ${value.DueDate}</span>
+                            </div>
+                            <div id="task-status-btn" style="margin-left: auto; display: inherit; align-items: center; gap: 5px">
+                                <button type="button" class="${getButtonType(value.Status)}" stlye="width: 10rem"
+                                >${showStatus(value.Status)}</button>
+                                <a class="btn btn-primary action-btn" 
+                                href="/index.php?task-view&id=${value.TaskId}" 
+                                role="button"
+                                id="task-${value.TaskId}">
+                                    View task
+                                </a>
+                            </div>
+                        </div>
+                    </div>`);
                 });
-                
-                showActionButton();
             }
         }
     });
@@ -35,7 +48,7 @@ function loadTasks(page) {
 
 
 
-$("#prev-btn").click(function() {
+$("#prev-btn").click(function () {
     if (currentPage > 1) {
         currentPage--;
         clearTasks();
@@ -43,7 +56,7 @@ $("#prev-btn").click(function() {
     }
 });
 
-$("#next-btn").click(function() {
+$("#next-btn").click(function () {
     currentPage++;
     clearTasks();
     loadTasks(currentPage);
@@ -81,33 +94,27 @@ function clearTasks() {
 // });
 
 ////////////////////////////////////
-
-function showActionButton() {
-    // Selecting children
-    var actionContainer = $(".table-head.action-container");
-    var taskIDs = $("#task-id").children(); // used for query
-
-    $.each(taskIDs, function (index, task) {
-        //add button for each
-        var action = $(".action");
-        $('<button/>', {
-            text: 'Open',
-            class: 'open-btn',
-            id: 'open-btn-' + index
-        }).wrap("<div/>").parent().appendTo(action);
-    });
-}
+const statusKv = {
+    1: "Not started",
+    2: "In progress",
+    3: "Completed",
+    4: "In Review",
+    5: "Verified"
+};
 
 function showStatus(status) {
-    const statusKv = {
-        1: "Not started",
-        2: "In progress",
-        3: "Completed",
-        4: "In Review",
-        5: "Verified"
-    };
-
     return statusKv[status];
+}
+
+function getButtonType(status){
+    switch (status){
+        case 1:
+            return "btn btn-info";
+        case 2:
+            return "btn btn-warning";
+        case 3:
+            return "btn btn-success";
+    }
 }
 
 
