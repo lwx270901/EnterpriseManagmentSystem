@@ -3,10 +3,13 @@ include($_SERVER['DOCUMENT_ROOT'] .'/includes/config.php');
 $departments = array();
 if (isset($_POST['department_id'])) {
     $id =  $_POST["department_id"];
-    $dep_id = $department_control->delete_department_head($id);
-    $employee_control->update_employee_to_normal($dep_id);
-    $department_control->delete_department($id);
+    $dep_head_id = $department_control->delete_department_head($id);
+    if (is_null($dep_head_id) == FALSE){
+      $employee_control->update_employee_to_normal($dep_head_id);
+    }
 
+    $employee_control->remove_employee_from_department($id);
+    $department_control->delete_department($id);
     $result = $department_control->get_all_departments();
     
     if ($result) {

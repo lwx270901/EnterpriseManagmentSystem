@@ -1,6 +1,6 @@
 <?php if ($_SESSION['role'] == 'director') : ?>
 
-<nav class="navbar navbar-expand-xxl navbar-light bg-light">
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="?func=director-dashboard">
     <img src="assets/images/logo.png" alt="" height="30" class="d-inline-block align-text-top">
