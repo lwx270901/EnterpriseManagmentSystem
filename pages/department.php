@@ -11,10 +11,11 @@ if (isset($_GET['func'])) {
         case 'department-employees':
             include_once 'components/department-employees.php';
             break;
+        case 'profile':
+            include_once 'profile.php';
+            break;
         case 'logout':
             logout();
             break;
-
     }
 }
-?>
