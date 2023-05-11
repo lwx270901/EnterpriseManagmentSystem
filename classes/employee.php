@@ -103,16 +103,6 @@ class Employee {
     $stmt->closeCursor();
   }
 
-  public function remove_employee_from_department($dep_id) {
-    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, DepartmentId = NULL WHERE DepartmentId = :department_id');
-    $roleId = 3;
-    $level = 1;
-    $stmt->bindParam(':roleId', $roleId);
-    $stmt->bindParam(':department_id', $dep_id);
-    $stmt->execute();
-    $stmt->closeCursor();
-  }
-
   public function delete_employee($id) {
     $stmt = $this->db->prepare('DELETE FROM employees WHERE EmployeeId = :id');
     $stmt->bindParam(':id', $id);
@@ -123,7 +113,12 @@ class Employee {
   }
 
   public function remove_employee_from_department($id){
-    $stmt = $this->db->prepare('UPDATE Employees SET Employees.DepartmentId = NULL WHERE Employees.EmployeeId = :emp_id');
+    $stmt = $this->db->prepare('
+    UPDATE Employees 
+    SET 
+      Employees.DepartmentId = NULL,
+      Employees.RoleId = 3
+    WHERE Employees.EmployeeId = :emp_id');
     $stmt->bindParam(':emp_id', $id);
     $stmt->execute();
     $stmt->closeCursor();

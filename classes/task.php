@@ -45,4 +45,16 @@ class Task {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function update_task_deadline($task_id, $new_deadline){
+    $stmt = $this->db->prepare('
+      UPDATE Tasks
+      SET Tasks.DueDate = :new_deadline, Tasks.Status = 2
+      WHERE Tasks.TaskId = :task_id;
+    ');
+    $stmt->bindParam(':new_deadline', $new_deadline);
+    $stmt->bindParam(':task_id', $task_id);
+    $stmt->execute();
+    return $stmt->rowCount();
+  }
 }

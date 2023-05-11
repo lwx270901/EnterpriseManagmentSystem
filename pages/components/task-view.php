@@ -1,11 +1,12 @@
 <?php
 $task_id = $_GET['id'];
 $task = $task_control->get_task_by_task_id($task_id)[0];
+$task_result = array();
+$review = array();
 
-if ($_SESSION['role'] == 'director' || $_SESSION['role'] == 'department_head') {
-
-} else {
-
+if ($task["Status"] == 3) {
+    $task_result = $result_control->get_results_by_task($task['TaskId'])[0];
+    $review = $review_control->get_review_by_result_id($task_result['TaskId'])[0];
 }
 
 ?>
@@ -71,9 +72,6 @@ if ($_SESSION['role'] == 'director' || $_SESSION['role'] == 'department_head') {
                         </div>
                         <div class="card-body">
                             <p class="card-text">Submitted time: <?php echo $task['LastUpdated']; ?></p>
-                            <?php
-                            $task_result = $result_control->get_results_by_task($task['TaskId'])[0];
-                            ?>
                             <div class="mb-3">
                                 <label for="comment" class="form-label">Comment</label>
                                 <textarea class="form-control" placeholder="enter comment" name="comment" readonly><?php echo $task_result['Comment'] ?></textarea>
@@ -86,40 +84,110 @@ if ($_SESSION['role'] == 'director' || $_SESSION['role'] == 'department_head') {
                     </div>
                 <?php endif; ?>
                 <!-- Only displays the submission form for normal employee -->
-                <?php if ($_SESSION['role'] == 'employee') :?>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title"><?php echo $task['Status'] == 3 ? 'Edit Submission' : 'Submit task'; ?></h5>
+                <?php if ($_SESSION['role'] == 'employee') : ?>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"><?php echo $task['Status'] == 3 ? 'Edit Submission' : 'Submit task'; ?></h5>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            if (isset($_SESSION['message'])) {
+                                echo '  <div class="alert alert-success" role="alert">' .
+                                    $_SESSION['message']
+                                    . '</div>';
+                            }
+                            ?>
+                            <form method="POST" action="../pages/employee/submit-task.php">
+                                <div class="mb-3">
+                                    <label for="task_id" class="form-label">Task ID:</label>
+                                    <input type="text" name="task_id" id="task_id" class="form-control" value="<?php echo $task['TaskId']; ?>" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description:</label>
+                                    <input type="text" name="description" id="description" class="form-control" value="<?php echo $task['Description']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Comment</label>
+                                    <textarea class="form-control" placeholder="enter comment" name="comment"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="file" class="form-label">Attachment:</label>
+                                    <input class="form-control" type="file" name="file" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <?php
-                        if (isset($_SESSION['message'])) {
-                            echo '  <div class="alert alert-success" role="alert">' .
-                                $_SESSION['message']
-                                . '</div>';
-                        }
-                        ?>
-                        <form method="POST" action="../pages/employee/submit-task.php">
-                            <div class="mb-3">
-                                <label for="task_id" class="form-label">Task ID:</label>
-                                <input type="text" name="task_id" id="task_id" class="form-control" value="<?php echo $task['TaskId']; ?>" readonly>
+                <?php endif; ?>
+                <!-- Review box for employee -->
+                <?php if ($task['Status'] == 3 && $_SESSION['role'] == 'employee') : ?>
+                    <div class="card">
+                        <div class="card-header" style="display: flex">
+                            <h5 class="card-title">Reviews</h5>
+                            <button type="button" class="btn btn-success" style="margin-left: auto">Approved</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <?php echo $review['ReviewComment'] ?>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Review box for dep_head -->
+                <?php elseif ($task['Status'] == 3 && $_SESSION['role'] == 'department_head') : ?>
+                    <div class="card">
+                        <form action="../pages/department-head/add-review.php" class="review-form" method="POST">
+                            <div class="card-header" style="display: flex"></div>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description:</label>
-                                <input type="text" name="description" id="description" class="form-control" value="<?php echo $task['Description']; ?>">
+                                <label for="Comment" class="form-label">Comment</label>
+                                <textarea class="form-control" placeholder="enter comment" name="comment" autofocus></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="comment" class="form-label">Comment</label>
-                                <textarea class="form-control" placeholder="enter comment" name="comment"></textarea>
+                            <div id="dtpicker" class="row mb-3" style="display: none">
+                                <label for="new-deadline" class="form-label">New deadline</label>
+                                <div class="col">
+                                    <input class="form-control" type="datetime-local" name="new-deadline" id="new-deadline">
+                                </div>
+                                <div class="col" id="error"></div>
                             </div>
-                            <div class="mb-3">
-                                <label for="file" class="form-label">Attachment:</label>
-                                <input class="form-control" type="file" name="file" required>
+                            <div class="btn-group" role="group" aria-label="Task review buttons">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="review-outcome" id="flexRadioDefault1" value="1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Approve
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="review-outcome" id="flexRadioDefault2" value="2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Reject
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="review-outcome" id="flexRadioDefault3" value="3">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        Request changes
+                                    </label>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                            <input name="result-id" value="<?php echo $task_result['ResultId']?>" style="display:none">
+                            <input name="task-id" value="<?php echo $task_id?>" style="display:none">
+                            <button type="submit">Submit</button>
                         </form>
+                        <!-- <div class="card-header" style="display: flex">
+                            <h5 class="card-title">Reviews</h5>
+                            <button type="button" class="btn btn-success" id="approve-btn">Approve</button>
+                            <button type="button" class="btn btn-danger" id="reject-btn">Reject</button>
+                            <button type="button" class="btn btn-warning" id="request-btn">Request changes</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <?php echo $review['ReviewComment'] ?>
+                                </div>
+                            </div>
+                        </div>  -->
                     </div>
-                </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -128,5 +196,19 @@ if ($_SESSION['role'] == 'director' || $_SESSION['role'] == 'department_head') {
 <?php
 unset($_SESSION["message"]);
 ?>
+
+<script>
+    $("#flexRadioDefault3").click(function(event) {
+        $("#dtpicker").show();
+    });
+
+    $("#flexRadioDefault1").click(function(event) {
+        $("#dtpicker").hide();
+    });
+
+    $("#flexRadioDefault2").click(function(event) {
+        $("#dtpicker").hide();
+    });
+</script>
 
 </html>

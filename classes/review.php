@@ -14,10 +14,11 @@ class Review {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function create_review($task_id, $status, $comment = '') {
-    $stmt = $this->db->prepare('INSERT INTO reviews (task_id, status, comment) VALUES (:task_id, :status, :comment)');
-    $stmt->bindParam(':task_id', $task_id);
-    $stmt->bindParam(':status', $status);
+  public function create_review($reviewer_id, $result_id, $outcome, $comment = '') {
+    $stmt = $this->db->prepare('INSERT INTO Reviews (ReviewerId, ResultId, ReviewOutcome, ReviewComment) VALUES (:reviewer_id, :result_id, :outcome, :comment)');
+    $stmt->bindParam(':reviewer_id', $reviewer_id);
+    $stmt->bindParam(':result_id', $result_id);
+    $stmt->bindParam(':outcome', $outcome);
     $stmt->bindParam(':comment', $comment);
     $stmt->execute();
     return $this->db->lastInsertId();
@@ -31,5 +32,11 @@ class Review {
     $stmt->execute();
     return $stmt->rowCount();
   }
+
+  public function get_review_by_result_id($result_id){
+    $stmt = $this->db->prepare("SELECT * FROM Reviews WHERE Reviews.ResultId = :result_id");
+    $stmt->bindParam(":result_id", $result_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
-?>
