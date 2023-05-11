@@ -13,24 +13,7 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="?func=director-dashboard">Department Management</a>
 					</li>
-			</div>
-
-<nav class="navbar navbar-expand-xl navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="?func=director-dashboard">
-    <img src="assets/images/logo.png" alt="" height="30" class="d-inline-block align-text-top">
-    ITask
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="?func=director-dashboard">Department Management</a>
-        </li>
-    </div>
-
+		</div>
     <div class="d-flex align-items-center">
         <!-- <div class="dropdown"> -->
         <div class="btn-group">
