@@ -2,11 +2,47 @@
 $task_id = $_GET['id'];
 $task = $task_control->get_task_by_task_id($task_id)[0];
 $task_result = array();
-$review = array();
+$review_list = array();
 
 if ($task["Status"] == 3) {
     $task_result = $result_control->get_results_by_task($task['TaskId'])[0];
-    $review = $review_control->get_review_by_result_id($task_result['TaskId'])[0];
+    $review_list = $review_control->get_review_by_result_id($task_result['TaskId']);
+}
+
+function displayReviewOutcomeButton($status)
+{
+    switch ($status) {
+        case '1':
+            return '<button type="button" class="btn btn-success" style="width: 6rem">Approved</button>';
+        case '2':
+            return '<button type="button" class="btn btn-danger" style="width: 6rem">Rejected</button>';
+        case '3':
+            return '<button type="button" class="btn btn-warning" style="width: 6rem">Need fix</button>';
+    }
+}
+
+
+function displayReviewerName($employee_control, $reviewer_id)
+{
+    return $employee_control->get_employee_name_by_id($reviewer_id)[0]["EmployeeName"];
+}
+
+function displayReview($employee_control, $review_list)
+{
+    foreach ($review_list as $review) {
+        echo '
+            <div class="card">
+                <div class="card-header" style="display: flex">
+                    <h6 class="card-title">' . displayReviewerName($employee_control, $review["ReviewerId"]) . '</h6>
+                    <div style="margin-left: auto">
+                    ' . displayReviewOutcomeButton($review["ReviewOutcome"]) . '
+                    </div>
+                </div>
+                <div class="card-body">
+                ' . $review["ReviewComment"] . ' 
+                </div>
+            </div>';
+    }
 }
 
 ?>
@@ -59,6 +95,7 @@ if ($task["Status"] == 3) {
 
                     </div>
                     <div class="card-body">
+                        <p class="card-text">Created by: <b><?php echo displayReviewerName($employee_control, $task['CreatedByEmployeeId']); ?></b></p>
                         <p class="card-text">Created at: <?php echo $task['CreatedDate']; ?></p>
                         <p class="card-text">Due date: <?php echo $task['DueDate']; ?></p>
                         <p class="card-text">Last updated: <?php echo $task['LastUpdated']; ?></p>
@@ -98,7 +135,7 @@ if ($task["Status"] == 3) {
                             }
                             ?>
                             <form method="POST" action="../pages/employee/submit-task.php">
-                                <div class="mb-3">
+                                <div class="mb-3" style="display: none">
                                     <label for="task_id" class="form-label">Task ID:</label>
                                     <input type="text" name="task_id" id="task_id" class="form-control" value="<?php echo $task['TaskId']; ?>" readonly>
                                 </div>
@@ -124,21 +161,18 @@ if ($task["Status"] == 3) {
                     <div class="card">
                         <div class="card-header" style="display: flex">
                             <h5 class="card-title">Reviews</h5>
-                            <button type="button" class="btn btn-success" style="margin-left: auto">Approved</button>
                         </div>
                         <div class="card-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php echo $review['ReviewComment'] ?>
-                                </div>
-                            </div>
+                            <?php echo displayReview($employee_control, $review_list) ?>
                         </div>
                     </div>
                     <!-- Review box for dep_head -->
                 <?php elseif ($task['Status'] == 3 && $_SESSION['role'] == 'department_head') : ?>
                     <div class="card">
+                        <div class="card-header" style="display: flex">
+                            <h5 class="card-title">Reviews</h5>
+                        </div>
                         <form action="../pages/department-head/add-review.php" class="review-form" method="POST">
-                            <div class="card-header" style="display: flex"></div>
                             <div class="mb-3">
                                 <label for="Comment" class="form-label">Comment</label>
                                 <textarea class="form-control" placeholder="enter comment" name="comment" autofocus></textarea>
@@ -170,23 +204,10 @@ if ($task["Status"] == 3) {
                                     </label>
                                 </div>
                             </div>
-                            <input name="result-id" value="<?php echo $task_result['ResultId']?>" style="display:none">
-                            <input name="task-id" value="<?php echo $task_id?>" style="display:none">
+                            <input name="result-id" value="<?php echo $task_result['ResultId'] ?>" style="display:none">
+                            <input name="task-id" value="<?php echo $task_id ?>" style="display:none">
                             <button type="submit    ">Submit</button>
                         </form>
-                        <!-- <div class="card-header" style="display: flex">
-                            <h5 class="card-title">Reviews</h5>
-                            <button type="button" class="btn btn-success" id="approve-btn">Approve</button>
-                            <button type="button" class="btn btn-danger" id="reject-btn">Reject</button>
-                            <button type="button" class="btn btn-warning" id="request-btn">Request changes</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php echo $review['ReviewComment'] ?>
-                                </div>
-                            </div>
-                        </div>  -->
                     </div>
                 <?php endif; ?>
             </div>
