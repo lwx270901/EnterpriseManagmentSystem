@@ -83,6 +83,16 @@ class Department {
     return $id;
   }
 
+  public function update_department_without_head($id, $name, $description) {
+    $stmt = $this->db->prepare('UPDATE departments SET DepartmentName = :name, DepartmentDescription = :description WHERE DepartmentId = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':description', $description);
+    $stmt->execute();
+
+    return $id;
+  }
+
   public function delete_department($dep_id) {
     $stmt = $this->db->prepare("
       UPDATE Employees
@@ -121,5 +131,6 @@ class Department {
     $stmt->closeCursor();
     return $dep_head_id;
   }
+
 }
 ?>
