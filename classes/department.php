@@ -83,9 +83,20 @@ class Department {
     return $id;
   }
 
-  public function delete_department($id) {
-    $stmt = $this->db->prepare('DELETE FROM departments WHERE DepartmentId = :id');
-    $stmt->bindParam(':id', $id);
+  public function delete_department($dep_id) {
+    $stmt = $this->db->prepare("
+      UPDATE Employees
+      SET Employees.DepartmentId = NULL, Employees.RoleId = 3
+      WHERE Employees.DepartmentId = :dep_id;
+
+      DELETE FROM DepartmentHeads
+      WHERE DepartmentHeads.DepartmentId = :dep_id;
+
+      DELETE FROM Departments
+      WHERE Departments.DepartmentId = :dep_id;
+    ");
+
+    $stmt->bindParam(':dep_id', $dep_id);
     $stmt->execute();
     return $stmt->rowCount();
   }
