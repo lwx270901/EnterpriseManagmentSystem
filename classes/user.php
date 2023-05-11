@@ -34,6 +34,14 @@ class User {
     return $row['role'];
   }
 
+  public function get_user_info() {
+    // Get the user's role by querying the database with the user ID from the session
+    $stmt = $this->db->prepare('SELECT role FROM users WHERE id = ?');
+    $stmt->execute(array($_SESSION['user_id']));
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row;
+  }
+
   public function get_name_like_input($dep_id, $dep_head_id){
     $stmt = $this->db->prepare('CALL Procedure_GetUsersFromDepLikeName (:dep_id, :dep_head_id)');
     $stmt->bindParam(':dep_id', $dep_id);

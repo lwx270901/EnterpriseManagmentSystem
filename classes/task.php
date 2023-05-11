@@ -38,4 +38,11 @@ class Task {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function get_task_by_task_id($task_id){
+    $stmt = $this->db->prepare('CALL Procedure_GetTaskByTaskId (:dh_id);');
+    $stmt->bindParam(':dh_id', $task_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
