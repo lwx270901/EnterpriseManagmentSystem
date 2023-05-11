@@ -33,7 +33,7 @@ include('pages/director/view-department.php');
     <input type="text" class="form-control" id="search-user" name="user" required><br>
     <div id="user-result-dropdown"></div>
 
-    <button id="add-dh" type="submit"> Add</button>
+    <button id="add-dh" type="submit">Add</button>
 </form>
 
 </div>

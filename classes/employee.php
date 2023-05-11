@@ -81,26 +81,34 @@ class Employee {
   }
 
   public function update_employee_to_dep_head($id, $department_id) {
-    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, Level = :lv, DepartmentId = :department_id WHERE EmployeeId = :id');
+    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, DepartmentId = :department_id WHERE EmployeeId = :id');
     $stmt->bindParam(':id', $id);
     $roleId = 2;
     $level = -1;
     $stmt->bindParam(':roleId', $roleId);
-    $stmt->bindParam(':lv', $level);
     $stmt->bindParam(':department_id', $department_id);
     $stmt->execute();
     $stmt->closeCursor();
   }
 
   public function update_employee_to_normal($id) {
-    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, Level = :lv, DepartmentId = :department_id WHERE EmployeeId = :id');
+    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, DepartmentId = :department_id WHERE EmployeeId = :id');
     $stmt->bindParam(':id', $id);
     $roleId = 3;
     $level = 1;
-    $department_id = 1;
+    $department_id = NULL;
     $stmt->bindParam(':roleId', $roleId);
-    $stmt->bindParam(':lv', $level);
     $stmt->bindParam(':department_id', $department_id);
+    $stmt->execute();
+    $stmt->closeCursor();
+  }
+
+  public function remove_employee_from_department($dep_id) {
+    $stmt = $this->db->prepare('UPDATE employees SET RoleId = :roleId, DepartmentId = NULL WHERE DepartmentId = :department_id');
+    $roleId = 3;
+    $level = 1;
+    $stmt->bindParam(':roleId', $roleId);
+    $stmt->bindParam(':department_id', $dep_id);
     $stmt->execute();
     $stmt->closeCursor();
   }

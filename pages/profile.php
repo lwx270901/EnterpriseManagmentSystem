@@ -7,8 +7,13 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+            <?php echo ($user["Gender"] == 0) ?
+            ' <img src="assets/images/man.avif" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px;">' : 
+            ' <img src="assets/images/woman.png" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px;">'; 
+            ?>
+           
             <h5 class="my-3"><?php echo $user["FirstName"]." ".$user["LastName"]; ?></h5>
             <p class="text-muted mb-1"><?php echo  strtoupper($_SESSION['role']); ?></p>
             <p class="text-muted mb-4">Viet Nam</p>
@@ -42,6 +47,15 @@
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0"><?php echo $user["PhoneNo"]; ?></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Gender</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><?php echo ($user["Gender"] == 0) ? 'Male' : 'Female'; ?></p>
               </div>
             </div>
           </div>
