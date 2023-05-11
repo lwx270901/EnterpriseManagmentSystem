@@ -51,6 +51,13 @@ class Employee {
     return $allempperdep;
   }
 
+  public function get_null_dep_employees_like_input($inpText) {
+    $stmt = $this->db->prepare("CALL Procedure_GetUsersLikesNameWithoutDep(:inpText)");
+    $stmt->bindParam(':inpText', $inpText);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function create_employee($name, $email, $department_id) {
     $stmt = $this->db->prepare('INSERT INTO employees (name, email, department_id) VALUES (:name, :email, :department_id)');
     $stmt->bindParam(':name', $name);
@@ -113,6 +120,24 @@ class Employee {
     $row = $stmt->rowCount();
     $stmt->closeCursor();
     return $row;
+  }
+
+  public function remove_employee_from_department($id){
+    $stmt = $this->db->prepare('UPDATE Employees SET Employees.DepartmentId = NULL WHERE Employees.EmployeeId = :emp_id');
+    $stmt->bindParam(':emp_id', $id);
+    $stmt->execute();
+    $stmt->closeCursor();
+  }
+
+  public function add_employee_to_department($emp_id, $dep_id){
+    $stmt = $this->db->prepare('
+    UPDATE Employees 
+    SET Employees.DepartmentId = :dep_id 
+    WHERE Employees.EmployeeId = :emp_id');
+    $stmt->bindParam(':emp_id', $emp_id);
+    $stmt->bindParam(':dep_id', $dep_id);
+    $stmt->execute();
+    $stmt->closeCursor();
   }
 }
 ?>

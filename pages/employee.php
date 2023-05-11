@@ -8,9 +8,11 @@ if (isset($_GET['func'])) {
         case 'task-result':
             include_once 'components/task-result.php';
             break;
+        case 'profile':
+            include_once 'profile.php';
+            break;
         case 'logout':
             logout();
             break;
     }
-} 
-?>
+}

@@ -1,14 +1,11 @@
-<div class="table-header row px-0 g-0">
-    <div class="field-name col px-0" id="task-id"> ID</div>
-    <div class="field-name col px-0" id="task-desc"> Task </div>
-    <div class="field-name col px-0" id="deadline"> Deadline </div>
-    <div class="field-name col px-0" id="assigners"> Assigner </div>
-    <div class="field-name col px-0" id="status"> Status </div>
-    <div class="field-name col px-0 action ">Action </div>
+<div class="table-header row px-0 g-0" style="margin-top: 1rem; border-radius: 10px">
+    <div class="field-name col px-0" id="task-id">Task list</div>
+    <div class="tasks-list" id="tasks-list">
+
+    </div>
 </div>
 
-<button id="prev-btn" style="display: block; margin: 0 auto">Prev</button>
-<button id="next-btn" style="display: block; margin: 0 auto">Next</button>
+<div id="pagination"></div>
 
 
 <?php

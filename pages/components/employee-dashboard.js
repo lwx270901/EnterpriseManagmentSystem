@@ -1,115 +1,118 @@
-// Creating children: Query from database, create children element
-// and append too appropriate column
-let currentPage = 1;
-const pageSize = 10;
+const ITEMS_PER_PAGE = 5;
+var currentPage = 1;
+var totalPages = 1;
+var tasks = [];
 
-// Load first page of tasks
-loadTasks(currentPage);
-
-function loadTasks(page) {
-    $.ajax({
-        url: "/pages/employee/load-task.php",
-        dataType: "json",
-        async: true,
-        data: {
-            page: page,
-            pageSize: pageSize
-        },
-        complete: function (data) {
-            if (data.status === 200) {
-                const tasks = JSON.parse(data.responseText);
-                console.log(tasks);
-                $.each(tasks, function (key, value) {
-                    $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-                    $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-                    $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-                    $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-                    $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-                });
-                
-                showActionButton();
-            }
+$.ajax({
+    url: "/pages/employee/load-task.php",
+    data: {
+        page: currentPage,
+        limit: ITEMS_PER_PAGE
+    },
+    dataType: "json",
+    async: true,
+    complete: function (data) {
+        if (data.status === 200) {
+            tasks = JSON.parse(data.responseText);
+            totalPages = Math.ceil(tasks.length / ITEMS_PER_PAGE);
+            renderTasks(currentPage, tasks);
+            renderPagination();
         }
-    });
-}
-
-
-
-$("#prev-btn").click(function() {
-    if (currentPage > 1) {
-        currentPage--;
-        clearTasks();
-        loadTasks(currentPage);
     }
 });
 
-$("#next-btn").click(function() {
-    currentPage++;
-    clearTasks();
-    loadTasks(currentPage);
-});
+function renderTasks(page, tasks) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageTasks = tasks.slice(start, end);
+    $("#tasks-list").empty();
 
-function clearTasks() {
-    $("#task-id").empty();
-    $("#task-desc").empty();
-    $("#deadline").empty();
-    $("#assigners").empty();
-    $("#status").empty();
+    $.each(pageTasks, function (key, value) {
+        $("#tasks-list").append(`
+                <div class="card" style="margin: 0.5rem 2rem 0.5rem 2rem; width: 60rem"> 
+                    <div class="card-body" style="display: flex">
+                        <div>
+                            <h5 class="card-title">Task ID: ${value.TaskId}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${value.Description}</h6>
+                            <span>Deadline: ${value.DueDate}</span>
+                        </div>
+                        <div id="task-status-btn" style="margin-left: auto; display: inherit; align-items: center; gap: 5px">
+                            <button type="button" class="${getButtonType(value.Status)}" stlye="width: 10rem"
+                            >${showStatus(value.Status)}</button>
+                            <a class="btn btn-primary action-btn" 
+                            href="/index.php?task-view&id=${value.TaskId}" 
+                            role="button"
+                            id="task-${value.TaskId}">
+                                View task
+                            </a>
+                        </div>
+                    </div>
+                </div>`);
+    });
 }
 
-
-
-// $.ajax({
-//     url: "/pages/employee/load-task.php",
-//     dataType: "json",
-//     async: true,
-//     complete: function (data) {
-//         if (data.status === 200) {
-//             const tasks = JSON.parse(data.responseText);
-//             console.log(tasks);
-//             $.each(tasks, function (key, value) {
-//                 $("#task-id").append(`<div class="element"> ${value.TaskId}</div>`);
-//                 $("#task-desc").append(`<div class="element"> ${value.Description}</div>`);
-//                 $("#deadline").append(`<div class="element"> ${value.DueDate} </div>`);
-//                 $("#assigners").append(`<div class="element"> ${value.AssignerName}</div>`);
-//                 $("#status").append(`<div class="element"> ${showStatus(value.Status)}</div>`);
-//             });
-
-//             showActionButton();
-//         }
-//     }
-// });
-
-////////////////////////////////////
-
-function showActionButton() {
+function showActionButton(pageTasks) {
     // Selecting children
     var actionContainer = $(".table-head.action-container");
-    var taskIDs = $("#task-id").children(); // used for query
+    var taskIDs = pageTasks.map(task => task.TaskId);
 
-    $.each(taskIDs, function (index, task) {
+    $(".action").empty();
+
+    $.each(taskIDs, function (index, taskId) {
         //add button for each
-        var action = $(".action");
         $('<button/>', {
             text: 'Open',
             class: 'open-btn',
             id: 'open-btn-' + index
-        }).wrap("<div/>").parent().appendTo(action);
+        }).wrap("<div/>").parent().appendTo($(".action"));
     });
+    renderPagination();
 }
 
-function showStatus(status) {
-    const statusKv = {
-        1: "Not started",
-        2: "In progress",
-        3: "Completed",
-        4: "In Review",
-        5: "Verified"
-    };
+const statusKv = {
+    1: "Not started",
+    2: "In progress",
+    3: "Completed",
+    4: "In Review",
+    5: "Verified"
+};
 
+function showStatus(status) {
     return statusKv[status];
 }
 
+function getButtonType(status) {
+    switch (status) {
+        case 1:
+            return "btn btn-info";
+        case 2:
+            return "btn btn-warning";
+        case 3:
+            return "btn btn-success";
+    }
+}
+
+
+function renderPagination() {
+    $("#pagination").empty();
+
+    if (totalPages > 1) {
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = $('<button/>', {
+                text: i,
+                class: 'page-btn' + (i === currentPage ? ' active' : '')
+            });
+
+            btn.on('click', function () {
+                currentPage = i;
+                renderTasks(currentPage, tasks);
+                renderPagination();
+            });
+
+            $("#pagination").append(btn);
+        }
+    }
+}
 
 //Handling Button
 var target = "";
@@ -190,7 +193,3 @@ $("#submit-btn").click(function (event) {
         }
     });
 });
-
-//Handle back-end for submit btn with chosen target
-//Check target index with target.attr('id') (open-btn-index)
-//From index => get ID from index with taskIDs[index] above

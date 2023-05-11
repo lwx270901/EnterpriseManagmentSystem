@@ -1,4 +1,3 @@
-
 import { handleSearchForDirector } from "../../assets/js/handleSearch.js";
 import { handleAddDep } from "../../assets/js/handleAddDep.js";
 import { handleDelDep } from "../../assets/js/handleDelDep.js";
