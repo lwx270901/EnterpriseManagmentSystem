@@ -172,7 +172,7 @@ if ($task["Status"] == 3) {
                             </div>
                             <input name="result-id" value="<?php echo $task_result['ResultId']?>" style="display:none">
                             <input name="task-id" value="<?php echo $task_id?>" style="display:none">
-                            <button type="submit">Submit</button>
+                            <button type="submit    ">Submit</button>
                         </form>
                         <!-- <div class="card-header" style="display: flex">
                             <h5 class="card-title">Reviews</h5>

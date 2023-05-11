@@ -13,6 +13,7 @@ BEGIN
     FROM Employees
     WHERE 
         (CONCAT(Employees.FirstName, ' ', Employees.LastName) LIKE CONCAT('%', input ,'%')
+        AND Employees.RoleId <> 2
         AND Employees.EmployeeId <> 1); -- Prevent calling the director;
 END$$
 DELIMITER ;

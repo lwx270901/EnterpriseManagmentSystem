@@ -2,7 +2,7 @@ USE enterprise_db;
 
 INSERT INTO Employees (EmployeeId, Username, Password, DepartmentId, FirstName, LastName, Email, PhoneNo, RoleId, Gender) 
 VALUES 
-    (1, 'director', 'e10adc3949ba59abbe56e057f20f883e', '1', 'Mr.', 'Director', 'minh@gmail.com', '123456', '1', 0),
+    (1, 'director', 'e10adc3949ba59abbe56e057f20f883e', '-1', 'Mr.', 'Director', 'minh@gmail.com', '123456', '1', 0),
     (2, 'dephead1', 'e10adc3949ba59abbe56e057f20f883e', '1', 'Head of Dep.', '1', 'dep1@gmail.com', '123457', '2', 1),
     (3, 'dephead2', 'e10adc3949ba59abbe56e057f20f883e', '2', 'Head of Dep.', '2', 'dep2@gmail.com', '123458', '2', 1),
     (4, 'dephead3', 'e10adc3949ba59abbe56e057f20f883e', '3', 'Head of Dep.', '3', 'dep3@gmail.com', '123459', '2', 0),

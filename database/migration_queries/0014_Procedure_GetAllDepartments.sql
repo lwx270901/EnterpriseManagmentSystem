@@ -13,6 +13,7 @@ BEGIN
         CONCAT(Employees.FirstName, ' ', Employees.LastName) AS DepartmentHeadName
     FROM Departments
     LEFT JOIN DepartmentHeads ON Departments.DepartmentId = DepartmentHeads.DepartmentId
-    LEFT JOIN Employees ON DepartmentHeads.DepartmentHeadId = Employees.EmployeeId;
+    LEFT JOIN Employees ON DepartmentHeads.DepartmentHeadId = Employees.EmployeeId
+    WHERE Departments.DepartmentId <> -1;
 END$$
 DELIMITER ;
