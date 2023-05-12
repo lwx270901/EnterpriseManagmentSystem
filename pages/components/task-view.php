@@ -71,9 +71,11 @@ function displayReview($employee_control, $review_list)
                                 <?php
                                 switch ($task['Status']) {
                                     case "1":
-                                        echo '  <form method="post" style="all: unset">
-                                                    <input type="submit" name="start-task" class="btn btn-primary" value="Start" />
-                                                </form>';
+                                        if ($_SESSION['role'] == "employee") {
+                                            echo '<form method="post" style="all: unset">
+                                                        <input type="submit" name="start-task" class="btn btn-primary" value="Start" />
+                                                    </form>';
+                                        }
                                         echo '<button type="button" class="btn btn-info">Not started</button>';
                                         break;
                                     case "2":
