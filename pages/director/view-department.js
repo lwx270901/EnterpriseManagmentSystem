@@ -10,6 +10,7 @@ var userEditResultDropdown = $("#user-edit-result-dropdown");
 var selectedUserEdit = $("#selected-user-edit");
 var editSubmitBtn = $('#edit-dh');
 var trs = $('tr');
+var dep_id;
 
 delBtn.each(function (index, b) {
     $(b).attr('id','del-btn-' + parseInt(index + 1));
@@ -24,7 +25,7 @@ delBtn.click(function(e){
 
 
 $('#editModal').on('show.bs.modal', function(e) {
-    var id = $(e.relatedTarget).closest("tr").find(".dep_id").text();
+    dep_id = $(e.relatedTarget).closest("tr").find(".dep_id").text();
 
     var dep_name = $(e.relatedTarget).closest("tr").find(".dep_name").text();
     searchDep.val(dep_name);
@@ -58,7 +59,8 @@ editSubmitBtn.on("click", function (e) {
         alert("Please fill in the department's description");
         return;
     }
-    handleUpdateDep(searchDep.val(), description.val(), selectedUserEdit.val(), "pages/director/edit-department.php");
+    console.log(selectedUserEdit.val());
+    handleUpdateDep(dep_id, searchDep.val(), description.val(), selectedUserEdit.val(), "pages/director/edit-department.php");
 });
 
 
