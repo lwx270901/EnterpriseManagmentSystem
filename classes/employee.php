@@ -134,5 +134,12 @@ class Employee {
     $stmt->execute();
     $stmt->closeCursor();
   }
+
+  public function get_employee_name_by_id($emp_id){
+    $stmt = $this->db->prepare("CALL Procedure_GetUsernameById(:inp)");
+    $stmt->bindParam(':inp', $emp_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
 ?>
