@@ -12,4 +12,5 @@ if ($_POST["new-deadline"]) {
     $new_deadline = $_POST["new-deadline"];
     $task_id = $_POST["task-id"];
     $task_control->update_task_deadline($task_id, $new_deadline);
+    header('Location: /index.php?task-view&id=' . $task_id);
 }

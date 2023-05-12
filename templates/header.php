@@ -13,26 +13,26 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="?func=director-dashboard">Department Management</a>
 					</li>
+			</div>
+			<div class="d-flex align-items-center">
+				<!-- <div class="dropdown"> -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+						<img src="assets/images/user.png" height="25" /> Account
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+						<li><a class="dropdown-item" href="?func=profile">Profile</a></li>
+						<li><a class="dropdown-item" href="?func=logout">Log Out</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
-    <div class="d-flex align-items-center">
-        <!-- <div class="dropdown"> -->
-        <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                <img src="assets/images/user.png" height="25" /> Account
-        </button>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-                <li><a class="dropdown-item" href="?func=profile">Profile</a></li>
-                <li><a class="dropdown-item" href="?func=logout">Log Out</a></li>
-            </ul>
-        </div>
-    </div>
-  </div>
-</nav>
+	</nav>
 
 <?php elseif ($_SESSION['role'] == 'department_head') : ?>
 	<nav class="navbar navbar-expand-xxl navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">
+			<a class="navbar-brand" href="?func=department-employees">
 				<img src="assets/images/logo.png" alt="" height="30" class="d-inline-block align-text-top">
 				ITask
 			</a>
@@ -70,7 +70,7 @@
 <?php elseif ($_SESSION['role'] == 'employee') : ?>
 	<nav class="navbar navbar-expand-xxl navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">
+			<a class="navbar-brand" href="/index.php?func=employee-dashboard">
 				<img src="assets/images/logo.png" alt="" height="30" class="d-inline-block align-text-top">
 				ITask
 			</a>

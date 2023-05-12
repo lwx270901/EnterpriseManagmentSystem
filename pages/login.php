@@ -17,23 +17,24 @@ include_once '../includes/config.php';
 
 $loginFailedMsg = "";
 
-function saveSessionInfoOnLoginSuccess($queryResult) {
+function saveSessionInfoOnLoginSuccess($queryResult)
+{
     $_SESSION['user_id'] = $queryResult['user_id'];
     $_SESSION['user'] = $queryResult['username'];
     $_SESSION['dep_id'] = $queryResult['department_id'];
 
-    switch ($queryResult['role_id']){
-        case(1):
+    switch ($queryResult['role_id']) {
+        case (1):
             $_SESSION['role'] = 'director';
             break;
-        case(2):
+        case (2):
             $_SESSION['role'] = 'department_head';
             break;
-        case(3):
+        case (3):
             $_SESSION['role'] = 'employee';
             break;
         default:
-            throw('Not implemented');
+            throw ('Not implemented');
             break;
     }
 
@@ -52,13 +53,23 @@ if (isset($_POST['submit'])) {
         $loginFailedMsg = "Login failed, check your username and password!";
     } else {
         saveSessionInfoOnLoginSuccess($loginQueryResult);
-        header('Location: /index.php');
+        switch ($_SESSION['role']) {
+            case 'director':
+                header('Location: /index.php');
+                break;
+            case 'department_head':
+                header('Location: /index.php?func=department-employees');
+                break;
+            case 'employee':
+                header('Location: /index.php?func=employee-dashboard');
+                break;
+        }
     }
 }
 ?>
 
 <body>
-    
+
     <div class="big-card row px-0">
         <div class="login-card  col-lg-4 col-sm-12 px-0">
             <div class="top-login-text">
@@ -87,4 +98,3 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
-
