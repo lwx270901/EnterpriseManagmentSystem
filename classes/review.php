@@ -15,7 +15,7 @@ class Review {
   }
 
   public function create_review($reviewer_id, $result_id, $outcome, $comment = '') {
-    $stmt = $this->db->prepare('INSERT INTO Reviews (ReviewerId, ResultId, ReviewOutcome, ReviewComment) VALUES (:reviewer_id, :result_id, :outcome, :comment)');
+    $stmt = $this->db->prepare('INSERT INTO Reviews (ReviewerId, ResultId, ReviewOutcome, ReviewComment, ReviewTime) VALUES (:reviewer_id, :result_id, :outcome, :comment, NOW());');
     $stmt->bindParam(':reviewer_id', $reviewer_id);
     $stmt->bindParam(':result_id', $result_id);
     $stmt->bindParam(':outcome', $outcome);

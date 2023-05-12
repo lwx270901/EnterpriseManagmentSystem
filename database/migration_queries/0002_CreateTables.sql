@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS Reviews (
     ResultId INT NOT NULL,
     ReviewOutcome INT NOT NULL,
     ReviewComment VARCHAR(5000),
+    ReviewTime DATETIME NOT NULL,
   	PRIMARY KEY (ReviewId),
     CONSTRAINT FK_ReviewReviewerId FOREIGN KEY (ReviewerId) REFERENCES Employees(EmployeeId),
     CONSTRAINT FK_ReviewTaskid FOREIGN KEY (ResultId) REFERENCES Results(ResultId)

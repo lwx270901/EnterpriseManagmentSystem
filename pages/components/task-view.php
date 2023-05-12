@@ -33,7 +33,7 @@ function displayReview($employee_control, $review_list)
         echo '
             <div class="card">
                 <div class="card-header" style="display: flex">
-                    <h6 class="card-title">' . displayReviewerName($employee_control, $review["ReviewerId"]) . '</h6>
+                    <h6 class="card-title">' . displayReviewerName($employee_control, $review["ReviewerId"]) . ' reviewed on ' . $review["ReviewTime"] . '</h6>
                     <div style="margin-left: auto">
                     ' . displayReviewOutcomeButton($review["ReviewOutcome"]) . '
                     </div>
@@ -157,7 +157,7 @@ function displayReview($employee_control, $review_list)
                     </div>
                 <?php endif; ?>
                 <!-- Review box for employee -->
-                <?php if ($task['Status'] == 3 && $_SESSION['role'] == 'employee') : ?>
+                <?php if ($task['Status'] == 3) : ?>
                     <div class="card">
                         <div class="card-header" style="display: flex">
                             <h5 class="card-title">Reviews</h5>
@@ -166,11 +166,12 @@ function displayReview($employee_control, $review_list)
                             <?php echo displayReview($employee_control, $review_list) ?>
                         </div>
                     </div>
-                    <!-- Review box for dep_head -->
-                <?php elseif ($task['Status'] == 3 && $_SESSION['role'] == 'department_head') : ?>
+                <?php endif; ?>
+                <!-- Review box for dep_head -->
+                <?php if ($task['Status'] == 3 && $_SESSION['role'] == 'department_head') : ?>
                     <div class="card">
                         <div class="card-header" style="display: flex">
-                            <h5 class="card-title">Reviews</h5>
+                            <h5 class="card-title">Add review</h5>
                         </div>
                         <form action="../pages/department-head/add-review.php" class="review-form" method="POST">
                             <div class="mb-3">
